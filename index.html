@@ -76,19 +76,24 @@
             margin-top: 10px;
         }
 
-        /* Sección de Cocinas */
-        .section-card {
+        /* Acordeón / Desplegable */
+        details.section-card {
             background: var(--bg-card);
             border-radius: 14px;
-            padding: 24px 20px;
-            margin-bottom: 22px;
+            margin-bottom: 16px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             border: 1px solid rgba(197, 160, 89, 0.25);
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .section-card::before {
+        details.section-card[open] {
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.15);
+            border-color: rgba(197, 160, 89, 0.6);
+        }
+
+        details.section-card::before {
             content: "";
             position: absolute;
             top: 0;
@@ -98,11 +103,24 @@
             background-color: var(--accent-gold);
         }
 
-        .section-header {
+        summary.section-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 6px;
+            justify-content: space-between;
+            padding: 20px 22px;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+        }
+
+        summary.section-header::-webkit-details-marker {
+            display: none;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .section-icon {
@@ -118,13 +136,35 @@
             font-weight: 700;
         }
 
+        .arrow-icon {
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            transition: transform 0.3s ease;
+        }
+
+        details[open] summary .arrow-icon {
+            transform: rotate(180deg);
+        }
+
+        .section-body {
+            padding: 0 22px 22px 22px;
+            border-top: 1px solid rgba(230, 213, 184, 0.4);
+            margin-top: 4px;
+            padding-top: 14px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .section-subtitle {
             font-family: var(--font-sub);
             font-style: italic;
             font-size: 0.88rem;
             color: var(--accent-gold);
-            margin-bottom: 18px;
-            padding-left: 32px;
+            margin-bottom: 14px;
         }
 
         .items-list {
@@ -190,131 +230,156 @@
         </header>
 
         <!-- 1. Cocina Mexicana -->
-        <div class="section-card">
-            <div class="section-header">
-                <span class="section-icon">🇲🇽</span>
-                <h2 class="section-title">Cocina Mexicana</h2>
+        <details class="section-card" open>
+            <summary class="section-header">
+                <div class="header-content">
+                    <span class="section-icon">🇲🇽</span>
+                    <h2 class="section-title">Cocina Mexicana</h2>
+                </div>
+                <span class="arrow-icon">▼</span>
+            </summary>
+            <div class="section-body">
+                <div class="section-subtitle">Tradición y sazón de nuestra tierra</div>
+                <ul class="items-list">
+                    <li class="item">
+                        <div class="item-name">Tacos de Suadero</div>
+                        <div class="item-desc">Confitado suave y terminado a la plancha.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Tacos de Longaniza</div>
+                        <div class="item-desc">Artesanal, especiada y dorada al momento.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Tacos Campechanos</div>
+                        <div class="item-desc">Combinación perfecta de suadero y longaniza.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Tacos Árabes</div>
+                        <div class="item-desc">Carne sazonada con especias estilo oriental en pan plano/tortilla suave.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Gringas Especiales</div>
+                        <div class="item-desc">Carne marinada con queso derretido en tortilla de harina doradita.</div>
+                    </li>
+                </ul>
             </div>
-            <div class="section-subtitle">Tradición y sazón de nuestra tierra</div>
-            <ul class="items-list">
-                <li class="item">
-                    <div class="item-name">Tacos de Suadero</div>
-                    <div class="item-desc">Confitado suave y terminado a la plancha.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Tacos de Longaniza</div>
-                    <div class="item-desc">Artesanal, especiada y dorada al momento.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Tacos Campechanos</div>
-                    <div class="item-desc">Combinación perfecta de suadero y longaniza.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Tacos Árabes</div>
-                    <div class="item-desc">Carne sazonada con especias estilo oriental en pan plano/tortilla suave.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Gringas Especiales</div>
-                    <div class="item-desc">Carne marinada con queso derretido en tortilla de harina doradita.</div>
-                </li>
-            </ul>
-        </div>
+        </details>
 
         <!-- 2. Cocina Italiana -->
-        <div class="section-card">
-            <div class="section-header">
-                <span class="section-icon">🇮🇹</span>
-                <h2 class="section-title">Cocina Italiana</h2>
+        <details class="section-card">
+            <summary class="section-header">
+                <div class="header-content">
+                    <span class="section-icon">🇮🇹</span>
+                    <h2 class="section-title">Cocina Italiana</h2>
+                </div>
+                <span class="arrow-icon">▼</span>
+            </summary>
+            <div class="section-body">
+                <div class="section-subtitle">Pastas clásicas y especialidades al horno</div>
+                <ul class="items-list">
+                    <li class="item">
+                        <div class="item-name">Pasta Alfredo con Camarón</div>
+                        <div class="item-desc">Cremosa salsa de parmesano, mantequilla, ajo y camarones salteados.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Pasta Fettuccine</div>
+                        <div class="item-desc">Receta clásica italiana preparada al dente.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Lasaña de Camarón</div>
+                        <div class="item-desc">Capas de pasta artesanal, bechamel cremosa y camarones gratinados.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Pizzas Artesanales</div>
+                        <div class="item-desc">Variedades: Peperoni, Mexicana y Hawaiana.</div>
+                    </li>
+                </ul>
             </div>
-            <div class="section-subtitle">Pastas clásicas y especialidades al horno</div>
-            <ul class="items-list">
-                <li class="item">
-                    <div class="item-name">Pasta Alfredo con Camarón</div>
-                    <div class="item-desc">Cremosa salsa de parmesano, mantequilla, ajo y camarones salteados.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Pasta Fettuccine</div>
-                    <div class="item-desc">Receta clásica italiana preparada al dente.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Lasaña de Camarón</div>
-                    <div class="item-desc">Capas de pasta artesanal, bechamel cremosa y camarones gratinados.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Pizzas Artesanales</div>
-                    <div class="item-desc">Variedades: Peperoni, Mexicana y Hawaiana.</div>
-                </li>
-            </ul>
-        </div>
+        </details>
 
         <!-- 3. Cocina Argentina -->
-        <div class="section-card">
-            <div class="section-header">
-                <span class="section-icon">🇦🇷</span>
-                <h2 class="section-title">Cocina Argentina</h2>
+        <details class="section-card">
+            <summary class="section-header">
+                <div class="header-content">
+                    <span class="section-icon">🇦🇷</span>
+                    <h2 class="section-title">Cocina Argentina</h2>
+                </div>
+                <span class="arrow-icon">▼</span>
+            </summary>
+            <div class="section-body">
+                <div class="section-subtitle">Fuegos, cortes selectos y parrilla al carbón</div>
+                <ul class="items-list">
+                    <li class="item">
+                        <div class="item-name">Carne a la Parrilla</div>
+                        <div class="item-desc">Cortes jugosos: Arrachera marinada, Picaña al carbón y Chistorra.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Choripán Porteño</div>
+                        <div class="item-desc">Chorizo parrillero en pan crujiente con chimichurri tradicional.</div>
+                    </li>
+                </ul>
             </div>
-            <div class="section-subtitle">Fuegos, cortes selectos y parrilla al carbón</div>
-            <ul class="items-list">
-                <li class="item">
-                    <div class="item-name">Carne a la Parrilla</div>
-                    <div class="item-desc">Cortes jugosos: Arrachera marinada, Picaña al carbón y Chistorra.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Choripán Porteño</div>
-                    <div class="item-desc">Chorizo parrillero en pan crujiente con chimichurri tradicional.</div>
-                </li>
-            </ul>
-        </div>
+        </details>
 
         <!-- 4. Mariscos -->
-        <div class="section-card">
-            <div class="section-header">
-                <span class="section-icon">🦐</span>
-                <h2 class="section-title">Mariscos</h2>
+        <details class="section-card">
+            <summary class="section-header">
+                <div class="header-content">
+                    <span class="section-icon">🦐</span>
+                    <h2 class="section-title">Mariscos</h2>
+                </div>
+                <span class="arrow-icon">▼</span>
+            </summary>
+            <div class="section-body">
+                <div class="section-subtitle">Frescura del mar con el toque de la casa</div>
+                <ul class="items-list">
+                    <li class="item">
+                        <div class="item-name">Mojarras</div>
+                        <div class="item-desc">Al mojo de ajo, A la diabla o Empanizada crujiente.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Camarones</div>
+                        <div class="item-desc">Al mojo de ajo, A la diabla o Empanizados dorados.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Costra de Camarón</div>
+                        <div class="item-desc">Camarones salteados envueltos en queso crujiente dorado a la plancha.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Aguachile</div>
+                        <div class="item-desc">Estilo Verde tradicional o Negro con salsas negras y chiles tatemados.</div>
+                    </li>
+                </ul>
             </div>
-            <div class="section-subtitle">Frescura del mar con el toque de la casa</div>
-            <ul class="items-list">
-                <li class="item">
-                    <div class="item-name">Mojarras</div>
-                    <div class="item-desc">Al mojo de ajo, A la diabla o Empanizada crujiente.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Camarones</div>
-                    <div class="item-desc">Al mojo de ajo, A la diabla o Empanizados dorados.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Costra de Camarón</div>
-                    <div class="item-desc">Camarones salteados envueltos en queso crujiente dorado a la plancha.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Aguachile</div>
-                    <div class="item-desc">Estilo Verde tradicional o Negro con salsas negras y chiles tatemados.</div>
-                </li>
-            </ul>
-        </div>
+        </details>
 
         <!-- 5. Cocina Asiática -->
-        <div class="section-card">
-            <div class="section-header">
-                <span class="section-icon">🥢</span>
-                <h2 class="section-title">Cocina Asiática</h2>
+        <details class="section-card">
+            <summary class="section-header">
+                <div class="header-content">
+                    <span class="section-icon">🥢</span>
+                    <h2 class="section-title">Cocina Asiática</h2>
+                </div>
+                <span class="arrow-icon">▼</span>
+            </summary>
+            <div class="section-body">
+                <div class="section-subtitle">Sabores de oriente entre lo fresco y lo crujiente</div>
+                <ul class="items-list">
+                    <li class="item">
+                        <div class="item-name">Sushi Rolls</div>
+                        <div class="item-desc">California Maki, Norimaki, Mar y Tierra, y Dragón Roll.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Pollo Frito Coreano (K-Chicken)</div>
+                        <div class="item-desc">Extra crujiente bañado en salsa agridulce especial.</div>
+                    </li>
+                    <li class="item">
+                        <div class="item-name">Ramen (Ramyeon)</div>
+                        <div class="item-desc">Fideos en caldo tradicional sazonado con complementos.</div>
+                    </li>
+                </ul>
             </div>
-            <div class="section-subtitle">Sabores de oriente entre lo fresco y lo crujiente</div>
-            <ul class="items-list">
-                <li class="item">
-                    <div class="item-name">Sushi Rolls</div>
-                    <div class="item-desc">California Maki, Norimaki, Mar y Tierra, y Dragón Roll.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Pollo Frito Coreano (K-Chicken)</div>
-                    <div class="item-desc">Extra crujiente bañado en salsa agridulce especial.</div>
-                </li>
-                <li class="item">
-                    <div class="item-name">Ramen (Ramyeon)</div>
-                    <div class="item-desc">Fideos en caldo tradicional sazonado con complementos.</div>
-                </li>
-            </ul>
-        </div>
+        </details>
 
         <!-- Footer -->
         <footer>
