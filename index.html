@@ -14,7 +14,6 @@
             --primary-dark: #1E1E1E;
             --accent-gold: #C5A059;
             --accent-gold-light: #E6D5B8;
-            --accent-gold-bg: rgba(197, 160, 89, 0.12);
             --text-muted: #666666;
             --font-title: 'Cinzel', serif;
             --font-sub: 'Playfair Display', serif;
@@ -43,10 +42,10 @@
         /* Encabezado */
         header {
             text-align: center;
-            padding: 30px 15px 22px 15px;
+            padding: 28px 15px 18px 15px;
             background: linear-gradient(180deg, rgba(230, 213, 184, 0.35) 0%, rgba(247, 243, 233, 0) 100%);
             border-radius: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             border-bottom: 1px solid var(--accent-gold-light);
         }
 
@@ -61,7 +60,7 @@
 
         .logo-subtitle {
             font-family: var(--font-body);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             letter-spacing: 4px;
             color: var(--accent-gold);
             font-weight: 600;
@@ -69,12 +68,61 @@
             text-transform: uppercase;
         }
 
-        .tagline {
-            font-family: var(--font-sub);
-            font-style: italic;
-            font-size: 1rem;
+        /* Selector de Pestañas (Tabs) */
+        .tabs-nav {
+            display: flex;
+            background: rgba(230, 213, 184, 0.35);
+            padding: 5px;
+            border-radius: 35px;
+            margin-bottom: 22px;
+            border: 1px solid var(--accent-gold-light);
+            gap: 5px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 11px 10px;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             color: var(--text-muted);
-            margin-top: 10px;
+            border-radius: 28px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary-dark);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .tab-btn.active .tab-icon {
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.4));
+        }
+
+        /* Contenedores de Pestañas */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.35s ease-in-out;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Bloque de Precios */
@@ -102,7 +150,7 @@
         }
 
         .pricing-days {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -112,14 +160,14 @@
 
         .pricing-price {
             font-family: var(--font-title);
-            font-size: 1.6rem;
+            font-size: 1.55rem;
             font-weight: 900;
             color: var(--primary-dark);
             line-height: 1.1;
         }
 
         .pricing-price span {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-family: var(--font-body);
             font-weight: 600;
             color: var(--accent-gold);
@@ -135,7 +183,7 @@
         details.section-card {
             background: var(--bg-card);
             border-radius: 14px;
-            margin-bottom: 16px;
+            margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             border: 1px solid rgba(197, 160, 89, 0.25);
             position: relative;
@@ -179,20 +227,20 @@
         }
 
         .section-icon {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
         }
 
         .section-title {
             font-family: var(--font-title);
-            font-size: 1.12rem;
-            letter-spacing: 1.5px;
+            font-size: 1.08rem;
+            letter-spacing: 1.2px;
             color: var(--primary-dark);
             text-transform: uppercase;
             font-weight: 700;
         }
 
         .arrow-icon {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--accent-gold);
             transition: transform 0.3s ease;
         }
@@ -209,15 +257,10 @@
             animation: fadeIn 0.3s ease-in-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .section-subtitle {
             font-family: var(--font-sub);
             font-style: italic;
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             color: var(--accent-gold);
             margin-bottom: 14px;
         }
@@ -239,16 +282,14 @@
 
         .item-name {
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             color: var(--primary-dark);
-            display: flex;
-            justify-content: space-between;
         }
 
         .item-desc {
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             color: var(--text-muted);
-            margin-top: 3px;
+            margin-top: 2px;
         }
 
         /* Footer */
@@ -269,7 +310,7 @@
             font-weight: 600;
             font-size: 0.75rem;
             letter-spacing: 1.5px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-transform: uppercase;
         }
     </style>
@@ -277,190 +318,320 @@
 <body>
 
     <div class="container">
-        <!-- Header -->
+        <!-- Header Principal -->
         <header>
             <div class="logo-title">ÓNÍLÉ</div>
-            <div class="logo-subtitle">Buffet</div>
-            <p class="tagline">La experiencia de 5 cocinas en un solo lugar</p>
+            <div class="logo-subtitle">Experiencia Culinaria</div>
         </header>
 
-        <!-- Tarifas Buffet -->
-        <div class="pricing-container">
-            <div class="pricing-box">
-                <div class="pricing-days">Lun - Mié</div>
-                <div class="pricing-price">$199 <span>MXN</span></div>
-                <div class="pricing-desc">Buffet general completo</div>
-            </div>
-            <div class="pricing-box featured">
-                <div class="pricing-days">Jue - Dom</div>
-                <div class="pricing-price">$299 <span>MXN</span></div>
-                <div class="pricing-desc">Buffet & Estaciones especiales</div>
-            </div>
+        <!-- Botones de Navegación por Pestañas -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('comida')">
+                <span class="tab-icon">🍽️</span> Buffet Comida
+            </button>
+            <button class="tab-btn" onclick="switchTab('desayunos')">
+                <span class="tab-icon">☕</span> Buffet Desayunos
+            </button>
         </div>
 
-        <!-- 1. Cocina Mexicana -->
-        <details class="section-card" open>
-            <summary class="section-header">
-                <div class="header-content">
-                    <span class="section-icon">🇲🇽</span>
-                    <h2 class="section-title">Cocina Mexicana</h2>
+        <!-- ================= PANEL 1: BUFFET COMIDA / 5 COCINAS ================= -->
+        <div id="tab-comida" class="tab-panel active">
+            <!-- Tarifas Comida -->
+            <div class="pricing-container">
+                <div class="pricing-box">
+                    <div class="pricing-days">Lun - Mié</div>
+                    <div class="pricing-price">$199 <span>MXN</span></div>
+                    <div class="pricing-desc">Buffet general completo</div>
                 </div>
-                <span class="arrow-icon">▼</span>
-            </summary>
-            <div class="section-body">
-                <div class="section-subtitle">Tradición y sazón de nuestra tierra</div>
-                <ul class="items-list">
-                    <li class="item">
-                        <div class="item-name">Tacos al Pastor</div>
-                        <div class="item-desc">Carne de cerdo adobada tradicional con piña, cilantro y cebolla.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Tacos de Suadero</div>
-                        <div class="item-desc">Confitado suave y terminado a la plancha.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Tacos de Longaniza</div>
-                        <div class="item-desc">Artesanal, especiada y dorada al momento.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Tacos Campechanos</div>
-                        <div class="item-desc">Combinación perfecta de suadero y longaniza.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Tacos Árabes</div>
-                        <div class="item-desc">Carne sazonada con especias estilo oriental en pan plano/tortilla suave.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Gringas Especiales</div>
-                        <div class="item-desc">Carne marinada con queso derretido en tortilla de harina doradita.</div>
-                    </li>
-                </ul>
-            </div>
-        </details>
-
-        <!-- 2. Cocina Italiana -->
-        <details class="section-card">
-            <summary class="section-header">
-                <div class="header-content">
-                    <span class="section-icon">🇮🇹</span>
-                    <h2 class="section-title">Cocina Italiana</h2>
+                <div class="pricing-box featured">
+                    <div class="pricing-days">Jue - Dom</div>
+                    <div class="pricing-price">$299 <span>MXN</span></div>
+                    <div class="pricing-desc">Buffet & Estaciones especiales</div>
                 </div>
-                <span class="arrow-icon">▼</span>
-            </summary>
-            <div class="section-body">
-                <div class="section-subtitle">Pastas clásicas y especialidades al horno</div>
-                <ul class="items-list">
-                    <li class="item">
-                        <div class="item-name">Pasta Alfredo con Camarón</div>
-                        <div class="item-desc">Cremosa salsa de parmesano, mantequilla, ajo y camarones salteados.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Pasta Fettuccine</div>
-                        <div class="item-desc">Receta clásica italiana preparada al dente.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Lasaña de Camarón</div>
-                        <div class="item-desc">Capas de pasta artesanal, bechamel cremosa y camarones gratinados.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Pizzas Artesanales</div>
-                        <div class="item-desc">Variedades: Peperoni, Mexicana y Hawaiana.</div>
-                    </li>
-                </ul>
             </div>
-        </details>
 
-        <!-- 3. Cocina Argentina -->
-        <details class="section-card">
-            <summary class="section-header">
-                <div class="header-content">
-                    <span class="section-icon">🇦🇷</span>
-                    <h2 class="section-title">Cocina Argentina</h2>
+            <!-- 1. Cocina Mexicana -->
+            <details class="section-card" open>
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🇲🇽</span>
+                        <h2 class="section-title">Cocina Mexicana</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Tradición y sazón de nuestra tierra</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Tacos al Pastor</div>
+                            <div class="item-desc">Carne de cerdo adobada tradicional con piña, cilantro y cebolla.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Tacos de Suadero</div>
+                            <div class="item-desc">Confitado suave y terminado a la plancha.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Tacos de Longaniza</div>
+                            <div class="item-desc">Artesanal, especiada y dorada al momento.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Tacos Campechanos</div>
+                            <div class="item-desc">Combinación perfecta de suadero y longaniza.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Tacos Árabes</div>
+                            <div class="item-desc">Carne sazonada con especias estilo oriental en tortilla suave.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Gringas Especiales</div>
+                            <div class="item-desc">Carne marinada con queso derretido en tortilla de harina doradita.</div>
+                        </li>
+                    </ul>
                 </div>
-                <span class="arrow-icon">▼</span>
-            </summary>
-            <div class="section-body">
-                <div class="section-subtitle">Fuegos, cortes selectos y parrilla al carbón</div>
-                <ul class="items-list">
-                    <li class="item">
-                        <div class="item-name">Carne a la Parrilla</div>
-                        <div class="item-desc">Cortes jugosos: Arrachera marinada, Picaña al carbón y Chistorra.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Choripán Porteño</div>
-                        <div class="item-desc">Chorizo parrillero en pan crujiente con chimichurri tradicional.</div>
-                    </li>
-                </ul>
-            </div>
-        </details>
+            </details>
 
-        <!-- 4. Mariscos -->
-        <details class="section-card">
-            <summary class="section-header">
-                <div class="header-content">
-                    <span class="section-icon">🦐</span>
-                    <h2 class="section-title">Mariscos</h2>
+            <!-- 2. Cocina Italiana -->
+            <details class="section-card">
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🇮🇹</span>
+                        <h2 class="section-title">Cocina Italiana</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Pastas clásicas y especialidades al horno</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Pasta Alfredo con Camarón</div>
+                            <div class="item-desc">Cremosa salsa de parmesano, mantequilla, ajo y camarones salteados.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Pasta Fettuccine</div>
+                            <div class="item-desc">Receta clásica italiana preparada al dente.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Lasaña de Camarón</div>
+                            <div class="item-desc">Capas de pasta artesanal, bechamel cremosa y camarones gratinados.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Pizzas Artesanales</div>
+                            <div class="item-desc">Variedades: Peperoni, Mexicana y Hawaiana.</div>
+                        </li>
+                    </ul>
                 </div>
-                <span class="arrow-icon">▼</span>
-            </summary>
-            <div class="section-body">
-                <div class="section-subtitle">Frescura del mar con el toque de la casa</div>
-                <ul class="items-list">
-                    <li class="item">
-                        <div class="item-name">Mojarras</div>
-                        <div class="item-desc">Al mojo de ajo, A la diabla o Empanizada crujiente.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Camarones</div>
-                        <div class="item-desc">Al mojo de ajo, A la diabla o Empanizados dorados.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Costra de Camarón</div>
-                        <div class="item-desc">Camarones salteados envueltos en queso crujiente dorado a la plancha.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Aguachile</div>
-                        <div class="item-desc">Estilo Verde tradicional o Negro con salsas negras y chiles tatemados.</div>
-                    </li>
-                </ul>
-            </div>
-        </details>
+            </details>
 
-        <!-- 5. Cocina Asiática -->
-        <details class="section-card">
-            <summary class="section-header">
-                <div class="header-content">
-                    <span class="section-icon">🥢</span>
-                    <h2 class="section-title">Cocina Asiática</h2>
+            <!-- 3. Cocina Argentina -->
+            <details class="section-card">
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🇦🇷</span>
+                        <h2 class="section-title">Cocina Argentina</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Fuegos, cortes selectos y parrilla al carbón</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Carne a la Parrilla</div>
+                            <div class="item-desc">Cortes jugosos: Arrachera marinada, Picaña al carbón y Chistorra.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Choripán Porteño</div>
+                            <div class="item-desc">Chorizo parrillero en pan crujiente con chimichurri tradicional.</div>
+                        </li>
+                    </ul>
                 </div>
-                <span class="arrow-icon">▼</span>
-            </summary>
-            <div class="section-body">
-                <div class="section-subtitle">Sabores de oriente entre lo fresco y lo crujiente</div>
-                <ul class="items-list">
-                    <li class="item">
-                        <div class="item-name">Sushi Rolls</div>
-                        <div class="item-desc">California Maki, Norimaki, Mar y Tierra, y Dragón Roll.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Pollo Frito Coreano (K-Chicken)</div>
-                        <div class="item-desc">Extra crujiente bañado en salsa agridulce especial.</div>
-                    </li>
-                    <li class="item">
-                        <div class="item-name">Ramen (Ramyeon)</div>
-                        <div class="item-desc">Fideos en caldo tradicional sazonado con complementos.</div>
-                    </li>
-                </ul>
-            </div>
-        </details>
+            </details>
 
-        <!-- Footer -->
+            <!-- 4. Mariscos -->
+            <details class="section-card">
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🦐</span>
+                        <h2 class="section-title">Mariscos</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Frescura del mar con el toque de la casa</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Mojarras</div>
+                            <div class="item-desc">Al mojo de ajo, A la diabla o Empanizada crujiente.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Camarones</div>
+                            <div class="item-desc">Al mojo de ajo, A la diabla o Empanizados dorados.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Costra de Camarón</div>
+                            <div class="item-desc">Camarones salteados envueltos en queso crujiente a la plancha.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Aguachile</div>
+                            <div class="item-desc">Estilo Verde tradicional o Negro con salsas negras y chiles tatemados.</div>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 5. Cocina Asiática -->
+            <details class="section-card">
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🥢</span>
+                        <h2 class="section-title">Cocina Asiática</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Sabores de oriente entre lo fresco y lo crujiente</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Sushi Rolls</div>
+                            <div class="item-desc">California Maki, Norimaki, Mar y Tierra, y Dragón Roll.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Pollo Frito Coreano (K-Chicken)</div>
+                            <div class="item-desc">Extra crujiente bañado en salsa agridulce especial.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Ramen (Ramyeon)</div>
+                            <div class="item-desc">Fideos en caldo tradicional sazonado con complementos.</div>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+        <!-- ================= PANEL 2: BUFFET DESAYUNOS ================= -->
+        <div id="tab-desayunos" class="tab-panel">
+            <!-- Tarifas Desayunos -->
+            <div class="pricing-container">
+                <div class="pricing-box">
+                    <div class="pricing-days">Lun - Mié</div>
+                    <div class="pricing-price">$138 <span>MXN</span></div>
+                    <div class="pricing-desc">Desayuno buffet completo</div>
+                </div>
+                <div class="pricing-box featured">
+                    <div class="pricing-days">Jue - Dom</div>
+                    <div class="pricing-price">$180 <span>MXN</span></div>
+                    <div class="pricing-desc">Desayuno buffet especial</div>
+                </div>
+            </div>
+
+            <!-- 1. Antojitos y Tradición -->
+            <details class="section-card" open>
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🍳</span>
+                        <h2 class="section-title">Antojitos Mexicanos</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Sabor casero para empezar la mañana</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Enchiladas Suizas</div>
+                            <div class="item-desc">Bañadas en salsa verde cremosa y queso gratinado.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Chilaquiles Tradicionales</div>
+                            <div class="item-desc">Crujientes con salsa de la casa, crema, queso fresco y cebolla.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Enmoladas Especiales</div>
+                            <div class="item-desc">Rellenas de pollo deshebrado y bañadas en mole artesanal.</div>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 2. Especialidades & Dulce -->
+            <details class="section-card">
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🥖</span>
+                        <h2 class="section-title">Especialidades & Dulce</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Recetas crujientes y esponjosas</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Molletes con Chorizo y Costra de Queso</div>
+                            <div class="item-desc">Frijoles refritos, chorizo dorado y una crujiente costra de queso fundido.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Sándwich Clásico</div>
+                            <div class="item-desc">Preparado al momento con ingredientes frescos.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Hotcakes Esponjosos</div>
+                            <div class="item-desc">Servidos con mantequilla, miel de abeja o maple.</div>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 3. Huevos al Gusto -->
+            <details class="section-card">
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🥚</span>
+                        <h2 class="section-title">Huevos al Gusto</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Preparados al momento en nuestra estación</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Huevos Estrellados</div>
+                            <div class="item-desc">Al término deseado sobre tortilla o solos.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Huevos Revueltos</div>
+                            <div class="item-desc">Suaves y esponjosos al natural.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Huevos con Jamón</div>
+                            <div class="item-desc">El clásico reconfortante del desayuno.</div>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+        <!-- Footer General -->
         <footer>
-            <div class="footer-badge">Buffet Libre</div>
+            <div class="footer-badge">Buffet Ilimitado</div>
             <p>¡Disfruta de todas nuestras estaciones sin límite!</p>
             <p style="margin-top: 6px; font-size: 0.75rem; color: #999;">Ónílé • Todos los derechos reservados</p>
         </footer>
     </div>
 
+    <!-- Script para alternar pestañas -->
+    <script>
+        function switchTab(tabName) {
+            // Desactivar todos los botones y paneles
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+
+            // Activar botón seleccionado
+            if (tabName === 'comida') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('tab-comida').classList.add('active');
+            } else if (tabName === 'desayunos') {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('tab-desayunos').classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
