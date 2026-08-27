@@ -6,7 +6,7 @@
     <title>Menú Buffet Ónílé</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-main: #F7F3E9;
@@ -14,6 +14,7 @@
             --primary-dark: #1E1E1E;
             --accent-gold: #C5A059;
             --accent-gold-light: #E6D5B8;
+            --accent-gold-bg: rgba(197, 160, 89, 0.12);
             --text-muted: #666666;
             --font-title: 'Cinzel', serif;
             --font-sub: 'Playfair Display', serif;
@@ -42,10 +43,10 @@
         /* Encabezado */
         header {
             text-align: center;
-            padding: 30px 15px 20px 15px;
-            background: linear-gradient(180deg, rgba(230, 213, 184, 0.3) 0%, rgba(247, 243, 233, 0) 100%);
+            padding: 30px 15px 22px 15px;
+            background: linear-gradient(180deg, rgba(230, 213, 184, 0.35) 0%, rgba(247, 243, 233, 0) 100%);
             border-radius: 16px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border-bottom: 1px solid var(--accent-gold-light);
         }
 
@@ -74,6 +75,60 @@
             font-size: 1rem;
             color: var(--text-muted);
             margin-top: 10px;
+        }
+
+        /* Bloque de Precios */
+        .pricing-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .pricing-box {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-gold-light);
+            border-radius: 12px;
+            padding: 14px 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-box.featured {
+            border-color: var(--accent-gold);
+            background: linear-gradient(180deg, #FFFFFF 0%, rgba(230, 213, 184, 0.15) 100%);
+        }
+
+        .pricing-days {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .pricing-price {
+            font-family: var(--font-title);
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--primary-dark);
+            line-height: 1.1;
+        }
+
+        .pricing-price span {
+            font-size: 0.9rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            color: var(--accent-gold);
+        }
+
+        .pricing-desc {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 3px;
         }
 
         /* Acordeón / Desplegable */
@@ -107,7 +162,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 22px;
+            padding: 18px 20px;
             cursor: pointer;
             list-style: none;
             user-select: none;
@@ -129,7 +184,7 @@
 
         .section-title {
             font-family: var(--font-title);
-            font-size: 1.15rem;
+            font-size: 1.12rem;
             letter-spacing: 1.5px;
             color: var(--primary-dark);
             text-transform: uppercase;
@@ -147,7 +202,7 @@
         }
 
         .section-body {
-            padding: 0 22px 22px 22px;
+            padding: 0 20px 20px 20px;
             border-top: 1px solid rgba(230, 213, 184, 0.4);
             margin-top: 4px;
             padding-top: 14px;
@@ -229,6 +284,20 @@
             <p class="tagline">La experiencia de 5 cocinas en un solo lugar</p>
         </header>
 
+        <!-- Tarifas Buffet -->
+        <div class="pricing-container">
+            <div class="pricing-box">
+                <div class="pricing-days">Lun - Mié</div>
+                <div class="pricing-price">$199 <span>MXN</span></div>
+                <div class="pricing-desc">Buffet general completo</div>
+            </div>
+            <div class="pricing-box featured">
+                <div class="pricing-days">Jue - Dom</div>
+                <div class="pricing-price">$299 <span>MXN</span></div>
+                <div class="pricing-desc">Buffet & Estaciones especiales</div>
+            </div>
+        </div>
+
         <!-- 1. Cocina Mexicana -->
         <details class="section-card" open>
             <summary class="section-header">
@@ -241,6 +310,10 @@
             <div class="section-body">
                 <div class="section-subtitle">Tradición y sazón de nuestra tierra</div>
                 <ul class="items-list">
+                    <li class="item">
+                        <div class="item-name">Tacos al Pastor</div>
+                        <div class="item-desc">Carne de cerdo adobada tradicional con piña, cilantro y cebolla.</div>
+                    </li>
                     <li class="item">
                         <div class="item-name">Tacos de Suadero</div>
                         <div class="item-desc">Confitado suave y terminado a la plancha.</div>
