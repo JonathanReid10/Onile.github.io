@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Interactivo Ónílé</title>
+    <title>Menú Ónílé</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
@@ -390,24 +390,26 @@
     <div class="container">
         <header>
             <div class="logo-title">ÓNÍLÉ</div>
-            <div class="logo-subtitle" id="dynamic-subtitle">Buffet Experience</div>
+            <div class="logo-subtitle" id="dynamic-subtitle">Buffet 5 cocinas</div>
         </header>
 
         <div class="tabs-nav">
             <button id="btn-comida" class="tab-btn active" onclick="switchTab('tab-comida')">Buffet</button>
             <button id="btn-desayunos" class="tab-btn" onclick="switchTab('tab-desayunos')">Desayunos</button>
-            <button id="btn-bebidas" class="tab-btn" onclick="switchTab('tab-bebidas')">Bebidas</button>
+            <button id="btn-bebidas" class="tab-btn" onclick="switchTab('tab-bebidas')">Bebidas y cocteleria</button>
         </div>
 
         <div id="tab-comida" class="tab-panel active">
             <div class="pricing-container">
                 <div class="pricing-box">
                     <div class="pricing-days">Lun - Mié</div>
+                    <div class="pricing-time">12:00 - 20:00</div>
                     <div class="pricing-price">$199 <span>MXN</span></div>
                     <div class="pricing-desc">Buffet general completo</div>
                 </div>
                 <div class="pricing-box">
                     <div class="pricing-days">Jue - Dom</div>
+                    <div class="pricing-time">12:00 - 20:00</div>
                     <div class="pricing-price">$299 <span>MXN</span></div>
                     <div class="pricing-desc">Buffet & Estaciones especiales</div>
                 </div>
@@ -445,7 +447,7 @@
                             <div class="item-desc">Carne sazonada con especias estilo oriental en tortilla suave.</div>
                         </li>
                         <li class="item">
-                            <div class="item-name">Gringas Especiales</div>
+                            <div class="item-name">Gringas</div>
                             <div class="item-desc">Carne marinada con queso fundido en tortilla de harina doradita.</div>
                         </li>
                     </ul>
@@ -492,7 +494,7 @@
                     <span class="arrow-icon">▼</span>
                 </summary>
                 <div class="section-body">
-                    <div class="section-subtitle">Fuegos, cortes selectos y parrilla al carbón</div>
+                    <div class="section-subtitle">Fuegos, cortes selectos y parrilla al carbón (no incluye tortillas)</div>
                     <ul class="items-list">
                         <li class="item">
                             <div class="item-name">Carne a la Parrilla</div>
@@ -518,12 +520,16 @@
                     <div class="section-subtitle">Frescura del mar con el toque de la casa</div>
                     <ul class="items-list">
                         <li class="item">
+                            <div class="item-name">Filetes</div>
+                            <div class="item-desc">Al mojo de ajo, A la diabla o Empanizado.</div>
+                        </li>
+                        <li class="item">
                             <div class="item-name">Mojarras</div>
-                            <div class="item-desc">Al mojo de ajo, A la diabla o Empanizada crujiente.</div>
+                            <div class="item-desc">Al mojo de ajo, A la diabla o Empanizada.</div>
                         </li>
                         <li class="item">
                             <div class="item-name">Camarones</div>
-                            <div class="item-desc">Al mojo de ajo, A la diabla o Empanizados dorados.</div>
+                            <div class="item-desc">Al mojo de ajo, A la diabla o Empanizados.</div>
                         </li>
                         <li class="item">
                             <div class="item-name">Costra de Camarón</div>
@@ -569,13 +575,15 @@
             <div class="pricing-container">
                 <div class="pricing-box">
                     <div class="pricing-days">Lun - Mié</div>
+                    <div class="pricing-time">8:00 - 12:00</div>
                     <div class="pricing-price">$138 <span>MXN</span></div>
-                    <div class="pricing-desc">Desayuno buffet completo</div>
+                    <div class="pricing-desc">Desayuno bufet</div>
                 </div>
                 <div class="pricing-box">
                     <div class="pricing-days">Jue - Dom</div>
+                    <div class="pricing-time">8:00 - 12:00</div>
                     <div class="pricing-price">$180 <span>MXN</span></div>
-                    <div class="pricing-desc">Desayuno buffet especial</div>
+                    <div class="pricing-desc">Desayuno bufet especial</div>
                 </div>
             </div>
 
