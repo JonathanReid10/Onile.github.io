@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Ónílé</title>
+    <title>Menú Interactivo Ónílé</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Colores Light (Comida/Desayuno) */
+            /* Tema Claro (Buffet / Desayunos) */
             --bg-main: #F7F3E9;
             --bg-card: #FFFFFF;
             --primary-dark: #1E1E1E;
@@ -17,22 +17,21 @@
             --accent-gold-dark: #9E7D3B;
             --accent-gold-light: #E6D5B8;
             --text-muted: #666666;
-            --border-card: rgba(197, 160, 89, 0.25);
+            --border-card: rgba(197, 160, 89, 0.28);
             
-            /* Fuentes */
             --font-title: 'Cinzel', serif;
             --font-sub: 'Playfair Display', serif;
             --font-body: 'Montserrat', sans-serif;
         }
 
-        /* Variables para el Tema Oscuro (Bebidas) */
+        /* Tema Oscuro (Bebidas) */
         body.dark-theme {
             --bg-main: #0D0D0D;
-            --bg-card: #1A1A1A;
+            --bg-card: #181818;
             --primary-dark: #F7F3E9;
-            --text-muted: #A0A0A0;
-            --border-card: #C5A059;
-            --accent-gold-light: #333333;
+            --text-muted: #A8A8A8;
+            --border-card: rgba(197, 160, 89, 0.45);
+            --accent-gold-light: #2A2A2A;
         }
 
         * {
@@ -47,7 +46,7 @@
             font-family: var(--font-body);
             line-height: 1.6;
             padding: 20px 15px 50px 15px;
-            transition: background-color 0.6s ease, color 0.6s ease;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
         .container {
@@ -55,16 +54,18 @@
             margin: 0 auto;
         }
 
+        /* Encabezado */
         header {
             text-align: center;
-            padding: 26px 15px 18px 15px;
+            padding: 22px 15px 16px 15px;
             border-bottom: 1px solid var(--accent-gold-light);
-            margin-bottom: 18px;
+            margin-bottom: 20px;
+            transition: border-color 0.5s ease;
         }
 
         .logo-title {
             font-family: var(--font-title);
-            font-size: 2.4rem;
+            font-size: 2.3rem;
             font-weight: 900;
             letter-spacing: 6px;
             text-transform: uppercase;
@@ -76,48 +77,52 @@
             color: var(--accent-gold);
             font-weight: 600;
             text-transform: uppercase;
+            margin-top: 3px;
         }
 
-        /* Selector de Pestañas */
+        /* Barra de Pestañas */
         .tabs-nav {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            background: rgba(197, 160, 89, 0.1);
+            background: rgba(197, 160, 89, 0.12);
             padding: 5px;
             border-radius: 35px;
-            margin-bottom: 25px;
+            margin-bottom: 24px;
             border: 1px solid var(--accent-gold-light);
-            gap: 4px;
+            gap: 5px;
+            transition: border-color 0.5s ease;
         }
 
         .tab-btn {
-            padding: 12px 6px;
+            padding: 11px 4px;
             border: none;
             outline: none;
             background: transparent;
             font-family: var(--font-body);
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             font-weight: 700;
             text-transform: uppercase;
             color: var(--text-muted);
-            border-radius: 30px;
+            border-radius: 28px;
             cursor: pointer;
-            transition: 0.4s;
+            transition: all 0.3s ease;
         }
 
         .tab-btn.active {
             background-color: var(--accent-gold);
             color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         body.dark-theme .tab-btn.active {
             background-color: #F7F3E9;
-            color: #000;
+            color: #0D0D0D;
         }
 
+        /* Paneles */
         .tab-panel {
             display: none;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.4s ease-in-out;
         }
 
         .tab-panel.active {
@@ -125,11 +130,11 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Bloques de Tarifas Buffet */
+        /* Tarifas Buffet */
         .pricing-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -139,121 +144,245 @@
 
         .pricing-box {
             background: var(--bg-card);
-            border: 1px solid var(--accent-gold-light);
+            border: 1px solid var(--border-card);
             border-radius: 12px;
-            padding: 15px;
+            padding: 14px 10px;
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+
+        .pricing-days {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 4px;
         }
 
         .pricing-price {
             font-family: var(--font-title);
             font-size: 1.6rem;
             font-weight: 900;
+            line-height: 1.1;
         }
 
-        .pricing-days {
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 700;
+        .pricing-price span {
+            font-size: 0.85rem;
+            font-family: var(--font-body);
+            font-weight: 600;
             color: var(--accent-gold);
         }
 
-        /* Estilo de Tarjetas y Secciones */
+        .pricing-desc {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        /* Secciones Desplegables (Acordeones) */
         details.section-card {
             background: var(--bg-card);
             border-radius: 14px;
-            margin-bottom: 15px;
+            margin-bottom: 14px;
             border: 1px solid var(--border-card);
             overflow: hidden;
-            transition: background-color 0.5s ease;
+            transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.3s ease;
         }
 
-        summary {
-            padding: 18px 22px;
+        details.section-card[open] {
+            box-shadow: 0 6px 18px rgba(197, 160, 89, 0.12);
+        }
+
+        summary.section-header {
+            padding: 16px 18px;
             cursor: pointer;
             list-style: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            user-select: none;
+        }
+
+        summary.section-header::-webkit-details-marker {
+            display: none;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            font-size: 1.25rem;
         }
 
         .section-title {
             font-family: var(--font-title);
-            font-size: 1.1rem;
-            letter-spacing: 1.5px;
+            font-size: 1.05rem;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
             font-weight: 700;
         }
 
+        .arrow-icon {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            transition: transform 0.3s ease;
+        }
+
+        details[open] summary .arrow-icon {
+            transform: rotate(180deg);
+        }
+
         .section-body {
-            padding: 0 22px 22px;
+            padding: 0 18px 18px 18px;
             border-top: 1px solid var(--accent-gold-light);
+            padding-top: 12px;
+        }
+
+        .section-subtitle {
+            font-family: var(--font-sub);
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+        }
+
+        .items-list {
+            list-style: none;
+            padding-left: 0;
         }
 
         .item {
-            padding: 10px 0;
+            padding: 9px 0;
             border-bottom: 1px dashed var(--accent-gold-light);
         }
 
-        .item:last-child { border-bottom: none; }
+        .item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
 
         .item-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .item-name { font-weight: 600; font-size: 0.95rem; }
-        .item-price { font-family: var(--font-title); font-weight: 700; color: var(--accent-gold); }
-        .item-desc { font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
-
-        /* Categorías de Bebidas */
-        .drinks-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        @media (min-width: 600px) {
-            .drinks-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        .drink-cat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            border-radius: 12px;
-            padding: 18px;
-        }
-
-        .drink-cat-title {
-            font-family: var(--font-title);
-            font-size: 1rem;
-            color: var(--accent-gold);
-            border-bottom: 1px solid var(--accent-gold-light);
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
             gap: 8px;
         }
 
-        /* Promo Noche de Drinks */
-        .promo-banner {
-            background: linear-gradient(135deg, #1A1A1A, #000);
-            border: 1px solid var(--accent-gold);
-            color: #FFF;
-            padding: 20px;
-            border-radius: 14px;
-            text-align: center;
-            margin-bottom: 25px;
-            display: none;
+        .item-name {
+            font-weight: 600;
+            font-size: 0.92rem;
         }
 
-        body.dark-theme .promo-banner { display: block; }
+        .item-price {
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--accent-gold);
+            white-space: nowrap;
+        }
 
-        .promo-title { font-family: var(--font-sub); font-size: 1.5rem; color: var(--accent-gold); }
+        .item-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Banner Promoción Bebidas */
+        .promo-banner {
+            background: linear-gradient(135deg, #181818 0%, #000000 100%);
+            border: 1px solid var(--accent-gold);
+            border-radius: 14px;
+            padding: 16px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        }
+
+        .promo-title {
+            font-family: var(--font-title);
+            font-size: 1.15rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .promo-schedule {
+            font-size: 0.88rem;
+            margin-top: 4px;
+            color: #F7F3E9;
+            letter-spacing: 0.5px;
+        }
+
+        /* Grid de Bebidas */
+        .drinks-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        @media (min-width: 580px) {
+            .drinks-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .drink-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 16px;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+
+        .drink-card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--accent-gold-light);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .drink-card-title {
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+        }
+
+        .drink-card-icon {
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background-color: var(--accent-gold-light);
+            color: var(--primary-dark);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body id="main-body">
@@ -261,49 +390,177 @@
     <div class="container">
         <header>
             <div class="logo-title">ÓNÍLÉ</div>
-            <div class="logo-subtitle" id="dynamic-subtitle">Bufet</div>
+            <div class="logo-subtitle" id="dynamic-subtitle">Buffet Experience</div>
         </header>
 
         <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('comida')">Bufet</button>
-            <button class="tab-btn" onclick="switchTab('desayunos')">Desayunos</button>
-            <button class="tab-btn" onclick="switchTab('bebidas')">Bebidas</button>
+            <button id="btn-comida" class="tab-btn active" onclick="switchTab('tab-comida')">Buffet</button>
+            <button id="btn-desayunos" class="tab-btn" onclick="switchTab('tab-desayunos')">Desayunos</button>
+            <button id="btn-bebidas" class="tab-btn" onclick="switchTab('tab-bebidas')">Bebidas</button>
         </div>
 
         <div id="tab-comida" class="tab-panel active">
             <div class="pricing-container">
                 <div class="pricing-box">
-                    <p class="pricing-days">Lun - Mié</p>
-                    <p class="pricing-price">$199 <span>MXN</span></p>
+                    <div class="pricing-days">Lun - Mié</div>
+                    <div class="pricing-price">$199 <span>MXN</span></div>
+                    <div class="pricing-desc">Buffet general completo</div>
                 </div>
                 <div class="pricing-box">
-                    <p class="pricing-days">Jue - Dom</p>
-                    <p class="pricing-price">$299 <span>MXN</span></p>
+                    <div class="pricing-days">Jue - Dom</div>
+                    <div class="pricing-price">$299 <span>MXN</span></div>
+                    <div class="pricing-desc">Buffet & Estaciones especiales</div>
                 </div>
             </div>
-            
+
             <details class="section-card" open>
-                <summary><span class="section-title">🇲🇽 Cocina Mexicana</span><span>▼</span></summary>
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🇲🇽</span>
+                        <h2 class="section-title">Cocina Mexicana</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
                 <div class="section-body">
-                    <div class="item"><div class="item-name">Tacos al Pastor</div><div class="item-desc">Tradicional con piña y cilantro.</div></div>
-                    <div class="item"><div class="item-name">Suadero & Longaniza</div></div>
-                    <div class="item"><div class="item-name">Árabes & Campechanos</div></div>
-                    <div class="item"><div class="item-name">Gringas</div></div>
+                    <div class="section-subtitle">Tradición y sazón de nuestra tierra</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Tacos al Pastor</div>
+                            <div class="item-desc">Carne de cerdo adobada tradicional con piña, cilantro y cebolla.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Tacos de Suadero</div>
+                            <div class="item-desc">Confitado suave y terminado a la plancha.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Tacos de Longaniza</div>
+                            <div class="item-desc">Artesanal, especiada y dorada al momento.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Tacos Campechanos</div>
+                            <div class="item-desc">Combinación perfecta de suadero y longaniza.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Tacos Árabes</div>
+                            <div class="item-desc">Carne sazonada con especias estilo oriental en tortilla suave.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Gringas Especiales</div>
+                            <div class="item-desc">Carne marinada con queso fundido en tortilla de harina doradita.</div>
+                        </li>
+                    </ul>
                 </div>
             </details>
+
             <details class="section-card">
-                <summary><span class="section-title">🇮🇹 Cocina Italiana</span><span>▼</span></summary>
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🇮🇹</span>
+                        <h2 class="section-title">Cocina Italiana</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
                 <div class="section-body">
-                    <div class="item"><div class="item-name">Pasta Alfredo con Camarón</div></div>
-                    <div class="item"><div class="item-name">Lasaña de Camarón</div></div>
-                    <div class="item"><div class="item-name">Pizzas Artesanales</div></div>
+                    <div class="section-subtitle">Pastas clásicas y especialidades al horno</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Pasta Alfredo con Camarón</div>
+                            <div class="item-desc">Cremosa salsa de parmesano, mantequilla, ajo y camarones salteados.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Pasta Fettuccine</div>
+                            <div class="item-desc">Receta clásica italiana preparada al dente.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Lasaña de Camarón</div>
+                            <div class="item-desc">Capas de pasta artesanal, bechamel cremosa y camarones gratinados.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Pizzas Artesanales</div>
+                            <div class="item-desc">Variedades: Peperoni, Mexicana y Hawaiana.</div>
+                        </li>
+                    </ul>
                 </div>
             </details>
+
             <details class="section-card">
-                <summary><span class="section-title">🇦🇷 Cocina Argentina</span><span>▼</span></summary>
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🇦🇷</span>
+                        <h2 class="section-title">Cocina Argentina</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
                 <div class="section-body">
-                    <div class="item"><div class="item-name">Cortes: Arrachera & Picaña</div></div>
-                    <div class="item"><div class="item-name">Chistorra & Choripán</div></div>
+                    <div class="section-subtitle">Fuegos, cortes selectos y parrilla al carbón</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Carne a la Parrilla</div>
+                            <div class="item-desc">Cortes jugosos: Arrachera marinada, Picaña al carbón y Chistorra.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Choripán Porteño</div>
+                            <div class="item-desc">Chorizo parrillero en pan crujiente con chimichurri tradicional.</div>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="section-card">
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🦐</span>
+                        <h2 class="section-title">Mariscos</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Frescura del mar con el toque de la casa</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Mojarras</div>
+                            <div class="item-desc">Al mojo de ajo, A la diabla o Empanizada crujiente.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Camarones</div>
+                            <div class="item-desc">Al mojo de ajo, A la diabla o Empanizados dorados.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Costra de Camarón</div>
+                            <div class="item-desc">Camarones salteados envueltos en queso crujiente a la plancha.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Aguachile</div>
+                            <div class="item-desc">Estilo Verde tradicional o Negro con salsas negras y chiles tatemados.</div>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="section-card">
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🥢</span>
+                        <h2 class="section-title">Cocina Asiática</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Sabores de oriente entre lo fresco y lo crujiente</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Sushi Rolls</div>
+                            <div class="item-desc">California Maki, Norimaki, Mar y Tierra, y Dragón Roll.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Pollo Frito Coreano (K-Chicken)</div>
+                            <div class="item-desc">Extra crujiente bañado en salsa agridulce especial.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Ramen (Ramyeon)</div>
+                            <div class="item-desc">Fideos en caldo tradicional sazonado con complementos.</div>
+                        </li>
+                    </ul>
                 </div>
             </details>
         </div>
@@ -311,113 +568,248 @@
         <div id="tab-desayunos" class="tab-panel">
             <div class="pricing-container">
                 <div class="pricing-box">
-                    <p class="pricing-days">Lun - Mié</p>
-                    <p class="pricing-price">$138 <span>MXN</span></p>
+                    <div class="pricing-days">Lun - Mié</div>
+                    <div class="pricing-price">$138 <span>MXN</span></div>
+                    <div class="pricing-desc">Desayuno buffet completo</div>
                 </div>
                 <div class="pricing-box">
-                    <p class="pricing-days">Jue - Dom</p>
-                    <p class="pricing-price">$180 <span>MXN</span></p>
+                    <div class="pricing-days">Jue - Dom</div>
+                    <div class="pricing-price">$180 <span>MXN</span></div>
+                    <div class="pricing-desc">Desayuno buffet especial</div>
                 </div>
             </div>
+
             <details class="section-card" open>
-                <summary><span class="section-title">🍳 Antojitos Mañaneros</span><span>▼</span></summary>
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🍳</span>
+                        <h2 class="section-title">Antojitos Mexicanos</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
                 <div class="section-body">
-                    <div class="item"><div class="item-name">Chilaquiles & Enchiladas Suizas</div></div>
-                    <div class="item"><div class="item-name">Enmoladas</div></div>
-                    <div class="item"><div class="item-name">Molletes con Chorizo (Costra de Queso)</div></div>
+                    <div class="section-subtitle">Sabor casero y tradicional</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Enchiladas Suizas</div>
+                            <div class="item-desc">Bañadas en salsa verde cremosa y queso gratinado.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Chilaquiles Tradicionales</div>
+                            <div class="item-desc">Crujientes en salsa verde o roja con crema, queso y cebolla.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Enmoladas Especiales</div>
+                            <div class="item-desc">Rellenas de pollo deshebrado y bañadas en mole artesanal.</div>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="section-card">
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🥖</span>
+                        <h2 class="section-title">Especialidades & Dulce</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Recetas crujientes y esponjosas</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Molletes con Chorizo y Costra de Queso</div>
+                            <div class="item-desc">Frijoles refritos, chorizo dorado y crujiente costra de queso fundido.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Sándwich Clásico de la Casa</div>
+                            <div class="item-desc">Preparado al momento con ingredientes frescos seleccionados.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Hotcakes Esponjosos</div>
+                            <div class="item-desc">Servidos con fruta de temporada, mantequilla y miel.</div>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="section-card">
+                <summary class="section-header">
+                    <div class="header-content">
+                        <span class="section-icon">🥚</span>
+                        <h2 class="section-title">Estación de Huevos</h2>
+                    </div>
+                    <span class="arrow-icon">▼</span>
+                </summary>
+                <div class="section-body">
+                    <div class="section-subtitle">Preparados al momento a tu gusto</div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Huevos Estrellados</div>
+                            <div class="item-desc">Al término deseado sobre tortilla o solos.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Huevos Revueltos</div>
+                            <div class="item-desc">Suaves y esponjosos al gusto.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Huevos con Jamón</div>
+                            <div class="item-desc">El clásico favorito para empezar el día.</div>
+                        </li>
+                    </ul>
                 </div>
             </details>
         </div>
 
         <div id="tab-bebidas" class="tab-panel">
             <div class="promo-banner">
-                <p class="promo-title">Noche de Drinks</p>
-                <p>Jueves a Sábado • 8:00 PM a 12:00 AM</p>
+                <div class="promo-title">✨ Noche de Drinks ✨</div>
+                <div class="promo-schedule">Jueves a Sábado • 8:00 PM a 12:00 AM</div>
             </div>
 
             <div class="drinks-grid">
-                <div class="drink-cat-card">
-                    <h3 class="drink-cat-title">🍸 Coctelería</h3>
-                    <div class="item"><div class="item-row"><span>Paloma / Margarita</span><span>$70/$80</span></div></div>
-                    <div class="item"><div class="item-row"><span>Cantarito / Sunrise</span><span>$90/$70</span></div></div>
-                    <div class="item"><div class="item-row"><span>Mojitos (Trad. / Frutos Rojos)</span><span>$75</span></div></div>
-                    <div class="item"><div class="item-row"><span>Medias de Seda</span><span>$80</span></div></div>
-                </div>
-
-                <div class="drink-cat-card">
-                    <h3 class="drink-cat-title">🍺 Cerveza</h3>
-                    <div class="item"><div class="item-row"><span>Victoria / XX / Corona</span><span>$45</span></div></div>
-                    <div class="item"><div class="item-row"><span>Modelo Esp. / Negra</span><span>$55</span></div></div>
-                    <div class="item"><div class="item-row"><span>Tecate ($40) / Ultra ($45)</span></div></div>
-                    <div class="item">
-                        <div class="item-name">Cerveza Camaronera</div>
-                        <div class="item-row"><small>Chica / Grande</small><span>$120 / $180</span></div>
+                <div class="drink-card">
+                    <div class="drink-card-header">
+                        <span class="drink-card-icon">🍸</span>
+                        <h3 class="drink-card-title">Coctelería</h3>
                     </div>
+                    <ul class="items-list">
+                        <li class="item"><div class="item-row"><span class="item-name">Paloma</span><span class="item-price">$70</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Margarita Frozen</span><span class="item-price">$80</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Cantarito</span><span class="item-price">$90</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Tequila Sunrise</span><span class="item-price">$70</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Mojito Tradicional</span><span class="item-price">$75</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Mojito Frutos Rojos</span><span class="item-price">$75</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Piña Colada</span><span class="item-price">$80</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Medias de Seda</span><span class="item-price">$80</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Gin Tonic Frutos Rojos</span><span class="item-price">$75</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Gin Tonic Tradicional</span><span class="item-price">$70</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Tom Collins</span><span class="item-price">$70</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Ultravioleta</span><span class="item-price">$80</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Azulito</span><span class="item-price">$70</span></div></li>
+                    </ul>
                 </div>
 
-                <div class="drink-cat-card">
-                    <h3 class="drink-cat-title">🍋 Preparados</h3>
-                    <div class="item">
-                        <div class="item-name">Michelada Clásica</div>
-                        <div class="item-row"><small>Chica / Grande</small><span>$75 / $110</span></div>
+                <div class="drink-card">
+                    <div class="drink-card-header">
+                        <span class="drink-card-icon">🍺</span>
+                        <h3 class="drink-card-title">Cervezas</h3>
                     </div>
-                    <div class="item">
-                        <div class="item-name">Michelada con Camarón</div>
-                        <div class="item-row"><small>Chica / Grande</small><span>$90 / $180</span></div>
+                    <ul class="items-list">
+                        <li class="item"><div class="item-row"><span class="item-name">Victoria / Corona</span><span class="item-price">$45</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">XX Ámbar / Lager</span><span class="item-price">$45</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Modelo Especial / Negra</span><span class="item-price">$55</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Tecate / Tecate Light</span><span class="item-price">$40</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Michelob Ultra</span><span class="item-price">$45</span></div></li>
+                        <li class="item">
+                            <div class="item-name">Cerveza Camaronera</div>
+                            <div class="item-row" style="margin-top: 3px;">
+                                <span class="item-desc">Chica / Grande</span>
+                                <span class="item-price">$120 / $180</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="drink-card">
+                    <div class="drink-card-header">
+                        <span class="drink-card-icon">🍋</span>
+                        <h3 class="drink-card-title">Preparados</h3>
                     </div>
-                    <div class="item"><div class="item-row"><span>Chelada / Cubana / Clamachela</span><span>$70/$75</span></div></div>
-                    <div class="item"><div class="item-row"><span>Clamato (Sin / Con Alcohol)</span><span>$70/$75</span></div></div>
+                    <ul class="items-list">
+                        <li class="item">
+                            <div class="item-name">Michelada Clásica</div>
+                            <div class="item-row" style="margin-top: 3px;">
+                                <span class="item-desc">Chica / Grande</span>
+                                <span class="item-price">$75 / $110</span>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Michelada con Camarón</div>
+                            <div class="item-row" style="margin-top: 3px;">
+                                <span class="item-desc">Chica / Grande</span>
+                                <span class="item-price">$90 / $180</span>
+                            </div>
+                        </li>
+                        <li class="item"><div class="item-row"><span class="item-name">Chelada</span><span class="item-price">$70</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Cubana</span><span class="item-price">$75</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Clamachela</span><span class="item-price">$75</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Clamato sin Alcohol</span><span class="item-price">$70</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Clamato con Alcohol</span><span class="item-price">$75</span></div></li>
+                    </ul>
                 </div>
 
-                <div class="drink-cat-card">
-                    <h3 class="drink-cat-title">🥃 Destilados & Tragos</h3>
-                    <div class="item"><div class="item-row"><span>Carajillo / Perla Negra</span><span>$90</span></div></div>
-                    <div class="item"><div class="item-row"><span>Baileys de Coco / Licor 43</span><span>$90</span></div></div>
-                    <div class="item"><div class="item-row"><span>Bacardí ($80) / Don Julio ($100)</span></div></div>
+                <div class="drink-card">
+                    <div class="drink-card-header">
+                        <span class="drink-card-icon">🥃</span>
+                        <h3 class="drink-card-title">Tragos & Licores</h3>
+                    </div>
+                    <ul class="items-list">
+                        <li class="item"><div class="item-row"><span class="item-name">Perla Negra</span><span class="item-price">$85 / $90</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Carajillo</span><span class="item-price">$80</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Baileys de Coco</span><span class="item-price">$85</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Licor 43</span><span class="item-price">$70</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Anís</span><span class="item-price">$50</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Bacardí</span><span class="item-price">$80</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Etiqueta Roja</span><span class="item-price">$90</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Don Julio</span><span class="item-price">$100</span></div></li>
+                    </ul>
                 </div>
 
-                <div class="drink-cat-card">
-                    <h3 class="drink-cat-title">🥤 Refrescos & Jugos</h3>
-                    <div class="item"><div class="item-row"><span>Coca Regular (500ml)</span><span>$48</span></div></div>
-                    <div class="item"><div class="item-row"><span>Coca Zero / Mundet / Sprite (600ml)</span><span>$45</span></div></div>
-                    <div class="item"><div class="item-row"><span>Limonada / Naranjada</span><span>$70</span></div></div>
-                    <div class="item"><div class="item-row"><span>Agua Bonafont / Mineral</span><span>$25/$40</span></div></div>
+                <div class="drink-card" style="grid-column: 1 / -1;">
+                    <div class="drink-card-header">
+                        <span class="drink-card-icon">🥤</span>
+                        <h3 class="drink-card-title">Sin Alcohol & Refrescos</h3>
+                    </div>
+                    <ul class="items-list">
+                        <li class="item"><div class="item-row"><span class="item-name">Coca-Cola Regular (500 ml)</span><span class="item-price">$48</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Coca-Cola Zero / Light (600 ml)</span><span class="item-price">$45</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Mundet / Sprite / Fresca / Fanta (600 ml)</span><span class="item-price">$45</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Limonada / Naranjada (Natural o Mineral)</span><span class="item-price">$70</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Jugo del Valle (Mango / Manzana / Durazno)</span><span class="item-price">$40</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Agua Mineral Peñafiel (600 ml)</span><span class="item-price">$40</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Agua Natural Bonafont (600 ml)</span><span class="item-price">$25</span></div></li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <footer>
-            <div class="footer-badge">Ónílé Experience</div>
-            <p>Sabor y Elegancia en cada detalle</p>
+            <div class="footer-badge">Ónílé Restaurant & Bar</div>
+            <p>Sabor, tradición y elegancia en cada detalle</p>
         </footer>
     </div>
 
     <script>
-        function switchTab(tabName) {
+        function switchTab(targetTabId) {
             const body = document.getElementById('main-body');
             const subtitle = document.getElementById('dynamic-subtitle');
-            
-            // Gestionar pestañas
+
+            // 1. Quitar estado activo de todos los botones y paneles
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
 
-            const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.innerText.toLowerCase().includes(tabName.substring(0,3)));
-            activeBtn.classList.add('active');
-            document.getElementById('tab-' + tabName).classList.add('active');
+            // 2. Activar el panel objetivo
+            const targetPanel = document.getElementById(targetTabId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
 
-            // Cambio de Tema
-            if (tabName === 'bebidas') {
-                body.classList.add('dark-theme');
-                subtitle.innerText = "Noche de Coctelería";
-            } else {
+            // 3. Activar el botón correspondiente y gestionar el tema
+            if (targetTabId === 'tab-comida') {
+                document.getElementById('btn-comida').classList.add('active');
                 body.classList.remove('dark-theme');
-                subtitle.innerText = tabName === 'desayunos' ? "Buffet de Desayunos" : "Buffet Experience";
+                subtitle.innerText = 'Buffet Experience';
+            } else if (targetTabId === 'tab-desayunos') {
+                document.getElementById('btn-desayunos').classList.add('active');
+                body.classList.remove('dark-theme');
+                subtitle.innerText = 'Buffet de Desayunos';
+            } else if (targetTabId === 'tab-bebidas') {
+                document.getElementById('btn-bebidas').classList.add('active');
+                body.classList.add('dark-theme');
+                subtitle.innerText = 'Noche de Coctelería';
             }
         }
     </script>
 </body>
 </html>
-"""
-
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(final_menu_html)
