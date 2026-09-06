@@ -44,7 +44,7 @@ window.ONILE_CONFIG = {
 
   /* Horarios usados para mostrar “Qué está disponible ahora”. */
   schedule: {
-    breakfast: { start: '08:00', end: '12:00' },
+    breakfast: { start: '09:00', end: '12:00' },
     buffet:    { start: '12:00', end: '20:00' },
     drinks:    { days: [4,5,6], start: '20:00', end: '24:00' }
   }
