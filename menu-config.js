@@ -13,7 +13,7 @@ window.ONILE_CONFIG = {
 
   /* Activa el modo evento cuando haya una noche especial. */
   event: {
-    active: true,
+    active: false,
     title: 'Promociones & Eventos',
     message: 'Descubre las promociones especiales disponibles en Ónílé.',
     floatingButton: true,
@@ -23,9 +23,9 @@ window.ONILE_CONFIG = {
 
   /* Promociones: activa o desactiva cada flyer sin borrar archivos. */
   promos: [
-    { active: true, src: 'img/promociones/promo1.png',   alt: 'Promoción 1 del evento Ónílé',   caption: 'Promoción especial 1' },
+    { : true, src: 'img/promociones/promo1.png',   alt: 'Promoción 1 del evento Ónílé',   caption: 'Promoción especial 1' },
     { active: true, src: 'img/promociones/promo1.1.png', alt: 'Promoción 1.1 del evento Ónílé', caption: 'Bellako Deluxe' },
-    { active: true, src: 'img/promociones/promo2.png',   alt: 'Promoción 2 del evento Ónílé',   caption: 'Promoción especial 2' },
+    { : true, src: 'img/promociones/promo2.png',   alt: 'Promoción 2 del evento Ónílé',   caption: 'Promoción especial 2' },
     { active: true, src: 'img/promociones/promo2.1.png', alt: 'Promoción 2.1 del evento Ónílé', caption: 'Rip Perreo' }
   ],
 
