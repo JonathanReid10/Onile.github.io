@@ -1292,7 +1292,7 @@
         <img id="promo-modal-img" src="" alt="Promoción ampliada">
     </div>
 
-    <script src="menu-config.js?v=2.2.1"></script>
+    <script src="menu-config.js?v=2.2.2"></script>
     <script>
         /*
          * PROMOCIONES DEL EVENTO
@@ -1300,13 +1300,54 @@
          * Para añadir o quitar promociones, solo modifica este arreglo.
          * Ejemplo: { src: 'img/promociones/botellas-evento.png', alt: 'Promoción de botellas', caption: 'Promoción especial del evento' }
          */
-        const CONFIG = window.ONILE_CONFIG || {};
-        const EVENT_PROMOS = (CONFIG.promos || [
-            { active: true, src: 'img/promociones/promo1.png', alt: 'Promoción 1 del evento Ónílé', caption: 'Promoción especial 1' },
-            { active: true, src: 'img/promociones/promo1.1.png', alt: 'Promoción 1.1 del evento Ónílé', caption: 'Bellako Deluxe' },
-            { active: true, src: 'img/promociones/promo2.png', alt: 'Promoción 2 del evento Ónílé', caption: 'Promoción especial 2' },
-            { active: true, src: 'img/promociones/promo2.1.png', alt: 'Promoción 2.1 del evento Ónílé', caption: 'Rip Perreo' }
-        ]).filter(p => p.active !== false);
+        // Configuración base embebida: el horario funciona aunque menu-config.js no cargue.
+        const DEFAULT_CONFIG = {
+            business: {
+                instagram: '',
+                tiktok: '',
+                mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Periferico+Emiliano+Sanchez+Piedras+152+Plaza+Portales',
+                timeZone: 'America/Mexico_City'
+            },
+            event: {
+                active: true,
+                title: 'Promociones & Eventos',
+                message: 'Descubre las promociones especiales disponibles en Ónílé.',
+                floatingButton: true,
+                bottles: true,
+                buckets: true
+            },
+            promos: [
+                { active: true, src: 'img/promociones/promo1.png', alt: 'Promoción 1 del evento Ónílé', caption: 'Promoción especial 1' },
+                { active: true, src: 'img/promociones/promo1.1.png', alt: 'Promoción 1.1 del evento Ónílé', caption: 'Bellako Deluxe' },
+                { active: true, src: 'img/promociones/promo2.png', alt: 'Promoción 2 del evento Ónílé', caption: 'Promoción especial 2' },
+                { active: true, src: 'img/promociones/promo2.1.png', alt: 'Promoción 2.1 del evento Ónílé', caption: 'Rip Perreo' }
+            ],
+            availability: {},
+            schedule: {
+                breakfast: { days:[0,1,2,3,4,5,6], start:'08:00', end:'12:00' },
+                buffet:    { days:[0,1,2,3,4,5,6], start:'12:00', end:'20:00' },
+                drinks:    { days:[4,5,6], start:'20:00', end:'24:00' }
+            }
+        };
+
+        const USER_CONFIG = window.ONILE_CONFIG || {};
+        const CONFIG = {
+            ...DEFAULT_CONFIG,
+            ...USER_CONFIG,
+            business: { ...DEFAULT_CONFIG.business, ...(USER_CONFIG.business || {}) },
+            event: { ...DEFAULT_CONFIG.event, ...(USER_CONFIG.event || {}) },
+            schedule: {
+                ...DEFAULT_CONFIG.schedule,
+                ...(USER_CONFIG.schedule || {}),
+                breakfast: { ...DEFAULT_CONFIG.schedule.breakfast, ...(USER_CONFIG.schedule?.breakfast || {}) },
+                buffet: { ...DEFAULT_CONFIG.schedule.buffet, ...(USER_CONFIG.schedule?.buffet || {}) },
+                drinks: { ...DEFAULT_CONFIG.schedule.drinks, ...(USER_CONFIG.schedule?.drinks || {}) }
+            },
+            availability: { ...DEFAULT_CONFIG.availability, ...(USER_CONFIG.availability || {}) },
+            promos: Array.isArray(USER_CONFIG.promos) ? USER_CONFIG.promos : DEFAULT_CONFIG.promos
+        };
+
+        const EVENT_PROMOS = CONFIG.promos.filter(p => p.active !== false);
 
         const SITE_CONFIG = {
             instagram: CONFIG.business?.instagram || '',
@@ -1639,8 +1680,10 @@
                 label='Promociones del evento disponibles'; tab='tab-promos'; open=true;
             }
 
-            title.innerHTML = `<span class="status-dot ${open?'':'closed'}"></span>${label}`;
-            title.title = `Horario calculado con zona ${businessTime.timeZone}`;
+            const hh = String(Math.floor(m / 60)).padStart(2,'0');
+            const mm = String(m % 60).padStart(2,'0');
+            title.innerHTML = `<span class="status-dot ${open?'':'closed'}"></span>${label} <small style="font-weight:600;opacity:.7">· ${hh}:${mm}</small>`;
+            title.title = `Horario Ónílé: ${hh}:${mm} · zona ${businessTime.timeZone}`;
             btn.textContent = open ? 'Ver carta' : 'Ver menú';
             btn.onclick = () => switchTab(tab);
         }
@@ -1715,10 +1758,6 @@
                 subtitle.innerText = 'Promociones & Eventos';
                 updateThemeColor(true);
             }
-        }
-    </script>
-</body>
-</html>
         }
     </script>
 </body>
