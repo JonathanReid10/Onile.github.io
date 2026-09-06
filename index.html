@@ -83,7 +83,7 @@
         /* Barra de Pestañas */
         .tabs-nav {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             background: rgba(197, 160, 89, 0.12);
             padding: 5px;
             border-radius: 35px;
@@ -362,6 +362,83 @@
             font-size: 1.1rem;
         }
 
+
+        /* Promociones de eventos */
+        .event-hero {
+            background: linear-gradient(145deg, #17120a 0%, #0d0d0d 72%);
+            border: 1px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 18px 16px;
+            margin-bottom: 18px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,.24);
+        }
+
+        .event-hero-title {
+            font-family: var(--font-title);
+            color: var(--accent-gold);
+            font-size: 1.15rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .event-hero-copy {
+            color: var(--text-muted);
+            font-size: .84rem;
+        }
+
+        .promos-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .promo-image-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 7px 18px rgba(0,0,0,.13);
+        }
+
+        .promo-image-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            background: #0d0d0d;
+        }
+
+        .promo-image-caption {
+            padding: 11px 13px 13px;
+            text-align: center;
+            font-size: .78rem;
+            color: var(--text-muted);
+        }
+
+        .promo-empty {
+            display: none;
+            padding: 24px 16px;
+            text-align: center;
+            border: 1px dashed var(--accent-gold);
+            border-radius: 14px;
+            color: var(--text-muted);
+            font-size: .84rem;
+        }
+
+        @media (min-width: 580px) {
+            .promos-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 440px) {
+            .tabs-nav {
+                grid-template-columns: repeat(2, 1fr);
+                border-radius: 18px;
+            }
+            .tab-btn { border-radius: 14px; }
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -397,6 +474,7 @@
             <button id="btn-comida" class="tab-btn active" onclick="switchTab('tab-comida')">Buffet</button>
             <button id="btn-desayunos" class="tab-btn" onclick="switchTab('tab-desayunos')">Desayunos</button>
             <button id="btn-bebidas" class="tab-btn" onclick="switchTab('tab-bebidas')">Bebidas y coctelería</button>
+            <button id="btn-promos" class="tab-btn" onclick="switchTab('tab-promos')">Promociones</button>
         </div>
 
         <div id="tab-comida" class="tab-panel active">
@@ -793,6 +871,20 @@
             </div>
         </div>
 
+        <!-- PROMOCIONES DE EVENTOS
+             Para cambiar imágenes, solo edita el arreglo EVENT_PROMOS al final del archivo.
+             Sube los archivos a la carpeta: img/promociones/
+             PNG: recomendado para flyers con texto / logos. JPG: recomendado para fotografías.
+        -->
+        <div id="tab-promos" class="tab-panel">
+            <div class="event-hero">
+                <div class="event-hero-title">✨ Promociones & Eventos ✨</div>
+                <div class="event-hero-copy">Descubre las promociones especiales disponibles en Ónílé.</div>
+            </div>
+            <div id="promos-grid" class="promos-grid"></div>
+            <div id="promo-empty" class="promo-empty">Próximamente tendremos nuevas promociones. ✨</div>
+        </div>
+
         <footer>
             <div class="footer-badge">ÓNÍLÉ Buffet</div>
             <p>Sabor, tradición y elegancia en cada detalle</p>
@@ -800,6 +892,54 @@
     </div>
 
     <script>
+        /*
+         * PROMOCIONES DEL EVENTO
+         * Sube las imágenes a /img/promociones/ dentro de tu repositorio de GitHub.
+         * Para añadir o quitar promociones, solo modifica este arreglo.
+         * Ejemplo: { src: 'img/promociones/botellas-evento.png', alt: 'Promoción de botellas', caption: 'Promoción especial del evento' }
+         */
+        const EVENT_PROMOS = [
+            { src: 'img/promociones/promo-evento-1.png', alt: 'Promociones del evento Ónílé', caption: 'Promociones especiales del evento' },
+            { src: 'img/promociones/promo-botellas.png', alt: 'Promociones de botellas Ónílé', caption: 'Botellas y cubetas especiales' }
+        ];
+
+        function renderPromos() {
+            const grid = document.getElementById('promos-grid');
+            const empty = document.getElementById('promo-empty');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+            EVENT_PROMOS.forEach(promo => {
+                const card = document.createElement('article');
+                card.className = 'promo-image-card';
+
+                const img = document.createElement('img');
+                img.src = promo.src;
+                img.alt = promo.alt || 'Promoción Ónílé';
+                img.loading = 'lazy';
+                img.onerror = () => { card.style.display = 'none'; checkPromos(); };
+
+                card.appendChild(img);
+                if (promo.caption) {
+                    const caption = document.createElement('div');
+                    caption.className = 'promo-image-caption';
+                    caption.textContent = promo.caption;
+                    card.appendChild(caption);
+                }
+                grid.appendChild(card);
+            });
+            checkPromos();
+        }
+
+        function checkPromos() {
+            const grid = document.getElementById('promos-grid');
+            const empty = document.getElementById('promo-empty');
+            const visible = [...grid.children].some(card => card.style.display !== 'none');
+            empty.style.display = visible ? 'none' : 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', renderPromos);
+
         function switchTab(targetTabId) {
             const body = document.getElementById('main-body');
             const subtitle = document.getElementById('dynamic-subtitle');
@@ -827,6 +967,10 @@
                 document.getElementById('btn-bebidas').classList.add('active');
                 body.classList.add('dark-theme');
                 subtitle.innerText = 'Noche de Coctelería';
+            } else if (targetTabId === 'tab-promos') {
+                document.getElementById('btn-promos').classList.add('active');
+                body.classList.add('dark-theme');
+                subtitle.innerText = 'Promociones & Eventos';
             }
         }
     </script>
