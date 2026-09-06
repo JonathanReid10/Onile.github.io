@@ -460,6 +460,131 @@
             margin-bottom: 10px;
             text-transform: uppercase;
         }
+
+
+        /* ===== ÓNÍLÉ 2.0: mejoras de experiencia móvil ===== */
+        html { scroll-behavior: smooth; }
+        body { padding-bottom: 96px; }
+
+        .welcome-hero {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            padding: 24px 18px;
+            margin: 0 0 18px;
+            background:
+                radial-gradient(circle at 15% 0%, rgba(197,160,89,.18), transparent 38%),
+                linear-gradient(145deg, var(--bg-card), var(--bg-main));
+            box-shadow: 0 10px 28px rgba(0,0,0,.08);
+        }
+        .welcome-hero::after {
+            content: "";
+            position: absolute; inset: 0;
+            background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.08), transparent 65%);
+            transform: translateX(-100%);
+            animation: heroShine 5s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes heroShine { 0%,70%{transform:translateX(-110%)} 100%{transform:translateX(110%)} }
+        .welcome-kicker { color: var(--accent-gold); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: .72rem; }
+        .welcome-title { font-family: var(--font-title); font-size: 1.55rem; line-height: 1.2; margin: 6px 0 8px; }
+        .welcome-copy { color: var(--text-muted); font-size: .88rem; }
+        .quick-actions { display:grid; grid-template-columns: repeat(2,1fr); gap:10px; margin-top:16px; }
+        .quick-btn {
+            border:1px solid var(--border-card); background:var(--bg-card); color:var(--primary-dark);
+            border-radius:14px; padding:12px 10px; font:700 .78rem var(--font-body); cursor:pointer;
+            display:flex; align-items:center; justify-content:center; gap:7px;
+        }
+        .quick-btn:hover, .quick-btn:active { border-color:var(--accent-gold); transform:translateY(-1px); }
+
+        .search-wrap { position:relative; margin:0 0 16px; }
+        .menu-search {
+            width:100%; border:1px solid var(--border-card); background:var(--bg-card); color:var(--primary-dark);
+            border-radius:16px; padding:13px 44px 13px 42px; font:500 .9rem var(--font-body); outline:none;
+        }
+        .menu-search:focus { border-color:var(--accent-gold); box-shadow:0 0 0 3px rgba(197,160,89,.12); }
+        .search-icon, .search-clear { position:absolute; top:50%; transform:translateY(-50%); }
+        .search-icon { left:14px; }
+        .search-clear { right:12px; border:0; background:transparent; color:var(--text-muted); font-size:1rem; cursor:pointer; display:none; }
+        .search-status { display:none; margin:-6px 0 14px; text-align:center; color:var(--text-muted); font-size:.78rem; }
+
+        .info-strip {
+            display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:0 0 18px;
+        }
+        .info-step { background:var(--bg-card); border:1px solid var(--border-card); border-radius:14px; padding:12px 8px; text-align:center; }
+        .info-step-num { width:28px; height:28px; border-radius:50%; margin:0 auto 7px; display:grid; place-items:center; background:var(--accent-gold); color:white; font-weight:800; font-size:.78rem; }
+        .info-step b { display:block; font-size:.75rem; }
+        .info-step span { color:var(--text-muted); font-size:.66rem; line-height:1.25; display:block; margin-top:3px; }
+
+        .benefits-card {
+            background:linear-gradient(145deg, rgba(197,160,89,.14), var(--bg-card)); border:1px solid var(--accent-gold);
+            border-radius:16px; padding:15px; margin-bottom:18px;
+        }
+        .benefits-title { font-family:var(--font-title); color:var(--accent-gold); text-transform:uppercase; letter-spacing:1.5px; font-size:.9rem; margin-bottom:10px; }
+        .benefit-row { display:flex; gap:10px; align-items:flex-start; padding:8px 0; }
+        .benefit-row + .benefit-row { border-top:1px dashed var(--border-card); }
+        .benefit-row strong { font-size:.84rem; }
+        .benefit-row small { display:block; color:var(--text-muted); margin-top:2px; }
+
+        .availability-note { font-size:.72rem; color:var(--text-muted); text-align:center; margin:14px 0 4px; }
+
+        .tag { display:inline-flex; align-items:center; padding:2px 7px; border-radius:999px; margin-left:6px; font-size:.58rem; font-weight:800; letter-spacing:.4px; vertical-align:middle; }
+        .tag-hot { background:rgba(205,73,73,.12); color:#c94a4a; }
+        .tag-gold { background:rgba(197,160,89,.15); color:var(--accent-gold-dark); }
+        .tag-new { background:rgba(78,150,110,.14); color:#3c8b60; }
+
+        /* Bebidas plegables sin rehacer el HTML */
+        .drink-card .drink-card-header { cursor:pointer; user-select:none; position:relative; padding-right:28px; }
+        .drink-card .drink-card-header::after { content:'▾'; position:absolute; right:4px; top:50%; transform:translateY(-50%); color:var(--accent-gold); transition:transform .25s ease; }
+        .drink-card.collapsed .drink-card-header::after { transform:translateY(-50%) rotate(-90deg); }
+        .drink-card .items-list { max-height:1600px; overflow:hidden; transition:max-height .35s ease, opacity .25s ease, margin .25s ease; opacity:1; }
+        .drink-card.collapsed .items-list { max-height:0; opacity:0; margin:0; }
+
+        /* Promos: botones, zoom y compartir */
+        .promo-card-actions { display:flex; gap:8px; padding:0 12px 12px; }
+        .promo-action-btn { flex:1; border:1px solid var(--border-card); background:transparent; color:var(--primary-dark); border-radius:10px; padding:9px; font-weight:700; cursor:pointer; }
+        .promo-action-btn:hover { border-color:var(--accent-gold); color:var(--accent-gold); }
+        .promo-image-card img { cursor:zoom-in; }
+        .promo-modal { position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.93); display:none; align-items:center; justify-content:center; padding:20px; }
+        .promo-modal.open { display:flex; }
+        .promo-modal img { max-width:96vw; max-height:88vh; object-fit:contain; border-radius:12px; box-shadow:0 16px 50px rgba(0,0,0,.5); }
+        .promo-modal-close { position:absolute; top:18px; right:18px; width:42px; height:42px; border-radius:50%; border:1px solid rgba(255,255,255,.35); background:#111; color:#fff; font-size:1.35rem; cursor:pointer; }
+
+        .floating-promo {
+            position:fixed; right:16px; bottom:88px; z-index:900; border:1px solid var(--accent-gold); background:#111; color:#f7f3e9;
+            border-radius:999px; padding:11px 15px; font:800 .72rem var(--font-body); box-shadow:0 8px 22px rgba(0,0,0,.3); cursor:pointer;
+            animation:pulsePromo 2.4s ease-in-out infinite;
+        }
+        @keyframes pulsePromo { 0%,100%{box-shadow:0 8px 22px rgba(0,0,0,.3)} 50%{box-shadow:0 8px 26px rgba(197,160,89,.42)} }
+
+        .mobile-nav {
+            position:fixed; left:10px; right:10px; bottom:10px; z-index:850; display:none;
+            grid-template-columns:repeat(4,1fr); gap:4px; padding:6px; border-radius:18px;
+            background:rgba(15,15,15,.94); border:1px solid rgba(197,160,89,.45); backdrop-filter:blur(12px);
+            box-shadow:0 10px 30px rgba(0,0,0,.35);
+        }
+        .mobile-nav button { border:0; background:transparent; color:#cfcfcf; border-radius:12px; padding:8px 4px; font:700 .63rem var(--font-body); cursor:pointer; }
+        .mobile-nav button.active { background:var(--accent-gold); color:#fff; }
+        .mobile-nav .nav-icon { display:block; font-size:1rem; margin-bottom:2px; }
+
+        .footer-links { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:12px 0 8px; }
+        .footer-link { border:1px solid var(--border-card); border-radius:999px; padding:7px 12px; color:var(--primary-dark); text-decoration:none; font-weight:700; font-size:.7rem; }
+        .footer-address { max-width:520px; margin:7px auto 0; color:var(--text-muted); line-height:1.45; }
+
+        .hidden-by-search { display:none !important; }
+
+        @media(max-width:640px) {
+            .mobile-nav { display:grid; }
+            .tabs-nav { display:none; }
+            .floating-promo { bottom:86px; }
+            .info-strip { grid-template-columns:1fr; }
+            .info-step { display:grid; grid-template-columns:34px 1fr; text-align:left; column-gap:8px; align-items:center; }
+            .info-step-num { margin:0; grid-row:1/3; }
+            .info-step span { margin:0; }
+        }
+        @media(max-width:390px){ .welcome-title{font-size:1.35rem}.quick-actions{grid-template-columns:1fr 1fr}.quick-btn{font-size:.7rem} }
+
     </style>
 </head>
 <body id="main-body">
@@ -470,6 +595,25 @@
             <div class="logo-subtitle" id="dynamic-subtitle">Buffet 5 cocinas</div>
         </header>
 
+        <section class="welcome-hero" aria-label="Bienvenida Ónílé">
+            <div class="welcome-kicker">5 cocinas · una sola experiencia</div>
+            <h1 class="welcome-title">Tú eliges. Nosotros cocinamos. Tú repites.</h1>
+            <p class="welcome-copy">Buffet de especialidades a la carta, desayunos, coctelería y promociones para cada ocasión.</p>
+            <div class="quick-actions">
+                <button class="quick-btn" onclick="switchTab('tab-comida')">🍽️ Buffet</button>
+                <button class="quick-btn" onclick="switchTab('tab-desayunos')">☕ Desayunos</button>
+                <button class="quick-btn" onclick="switchTab('tab-bebidas')">🍸 Drinks</button>
+                <button class="quick-btn" onclick="switchTab('tab-promos')">🔥 Promos</button>
+            </div>
+        </section>
+
+        <div class="search-wrap">
+            <span class="search-icon">⌕</span>
+            <input id="menu-search" class="menu-search" type="search" placeholder="Buscar platillo o bebida…" autocomplete="off" aria-label="Buscar en el menú">
+            <button id="search-clear" class="search-clear" aria-label="Limpiar búsqueda">✕</button>
+        </div>
+        <div id="search-status" class="search-status"></div>
+
         <div class="tabs-nav">
             <button id="btn-comida" class="tab-btn active" onclick="switchTab('tab-comida')">Buffet</button>
             <button id="btn-desayunos" class="tab-btn" onclick="switchTab('tab-desayunos')">Desayunos</button>
@@ -478,6 +622,18 @@
         </div>
 
         <div id="tab-comida" class="tab-panel active">
+            <section aria-label="Cómo funciona el buffet">
+                <div class="info-strip">
+                    <div class="info-step"><div class="info-step-num">1</div><b>Elige de la carta</b><span>Pide las especialidades que quieras probar.</span></div>
+                    <div class="info-step"><div class="info-step-num">2</div><b>Lo preparamos</b><span>Tu pedido se cocina y llega directo a tu mesa.</span></div>
+                    <div class="info-step"><div class="info-step-num">3</div><b>Vuelve a pedir</b><span>Disfruta el buffet sin límite durante tu visita.</span></div>
+                </div>
+                <div class="benefits-card">
+                    <div class="benefits-title">✨ Oportunidades Ónílé</div>
+                    <div class="benefit-row"><span>🎂</span><div><strong>Cumpleañero: buffet sin costo</strong><small>La persona que cumple años únicamente paga sus bebidas.</small></div></div>
+                    <div class="benefit-row"><span>👧👦</span><div><strong>Menores de 1.10 m: buffet sin costo</strong><small>Ideal para venir en familia y disfrutar más por menos.</small></div></div>
+                </div>
+            </section>
             <div class="pricing-container">
                 <div class="pricing-box">
                     <div class="pricing-days">Lun - Mié</div>
@@ -602,10 +758,6 @@
                             <div class="item-desc">Al mojo de ajo, A la diabla o Empanizado.</div>
                         </li>
                         <li class="item">
-                            <div class="item-name">Filetes</div>
-                            <div class="item-desc">Al mojo de ajo, a la diabla o empanizados.</div>
-                        </li>
-                        <li class="item">
                             <div class="item-name">Mojarras</div>
                             <div class="item-desc">Al mojo de ajo, a la diabla o empanizada.</div>
                         </li>
@@ -651,6 +803,7 @@
                     </ul>
                 </div>
             </details>
+            <p class="availability-note">* Algunos platillos e ingredientes pueden estar sujetos a disponibilidad.</p>
         </div>
 
         <div id="tab-desayunos" class="tab-panel">
@@ -761,6 +914,7 @@
                     </ul>
                 </div>
             </details>
+            <p class="availability-note">* Algunos productos pueden estar sujetos a disponibilidad.</p>
         </div>
 
         <div id="tab-bebidas" class="tab-panel">
@@ -940,7 +1094,27 @@
         <footer>
             <div class="footer-badge">ÓNÍLÉ Buffet</div>
             <p>Sabor, tradición y elegancia en cada detalle</p>
+            <p class="footer-address">📍 Periférico Emiliano Sánchez Piedras #152, “Plaza Portales”.</p>
+            <div class="footer-links">
+                <a class="footer-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Periferico+Emiliano+Sanchez+Piedras+152+Plaza+Portales">📍 Cómo llegar</a>
+                <a id="instagram-link" class="footer-link" target="_blank" rel="noopener" href="#">Instagram</a>
+                <a id="tiktok-link" class="footer-link" target="_blank" rel="noopener" href="#">TikTok</a>
+            </div>
         </footer>
+    </div>
+
+    <button class="floating-promo" onclick="switchTab('tab-promos')">🔥 Promociones de hoy</button>
+
+    <nav class="mobile-nav" aria-label="Navegación principal móvil">
+        <button data-tab="tab-comida" class="active" onclick="switchTab('tab-comida')"><span class="nav-icon">🍽️</span>Buffet</button>
+        <button data-tab="tab-desayunos" onclick="switchTab('tab-desayunos')"><span class="nav-icon">☕</span>Desayunos</button>
+        <button data-tab="tab-bebidas" onclick="switchTab('tab-bebidas')"><span class="nav-icon">🍸</span>Drinks</button>
+        <button data-tab="tab-promos" onclick="switchTab('tab-promos')"><span class="nav-icon">🔥</span>Promos</button>
+    </nav>
+
+    <div id="promo-modal" class="promo-modal" role="dialog" aria-modal="true" aria-label="Promoción ampliada">
+        <button class="promo-modal-close" onclick="closePromoModal()">✕</button>
+        <img id="promo-modal-img" src="" alt="Promoción ampliada">
     </div>
 
     <script>
@@ -951,9 +1125,39 @@
          * Ejemplo: { src: 'img/promociones/botellas-evento.png', alt: 'Promoción de botellas', caption: 'Promoción especial del evento' }
          */
         const EVENT_PROMOS = [
+            { src: 'img/promociones/promo1.png', alt: 'Promoción 1 del evento Ónílé', caption: 'Promoción especial 1' },
             { src: 'img/promociones/promo1.1.png', alt: 'Promoción 1.1 del evento Ónílé', caption: 'Bellako Deluxe' },
+            { src: 'img/promociones/promo2.png', alt: 'Promoción 2 del evento Ónílé', caption: 'Promoción especial 2' },
             { src: 'img/promociones/promo2.1.png', alt: 'Promoción 2.1 del evento Ónílé', caption: 'Rip Perreo' }
         ];
+
+        const SITE_CONFIG = {
+            instagram: '', // Ejemplo: 'https://instagram.com/tuusuario'
+            tiktok: ''     // Ejemplo: 'https://tiktok.com/@tuusuario'
+        };
+
+        function openPromoModal(src, alt) {
+            const modal = document.getElementById('promo-modal');
+            const modalImg = document.getElementById('promo-modal-img');
+            modalImg.src = src; modalImg.alt = alt || 'Promoción Ónílé';
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePromoModal() {
+            document.getElementById('promo-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        async function sharePromo(promo) {
+            const shareData = { title: promo.caption || 'Promoción Ónílé', text: promo.caption || 'Mira esta promoción de Ónílé', url: location.href };
+            if (navigator.share) {
+                try { await navigator.share(shareData); } catch(e) {}
+            } else {
+                try { await navigator.clipboard.writeText(location.href); alert('Enlace copiado para compartir.'); }
+                catch(e) { prompt('Copia este enlace:', location.href); }
+            }
+        }
 
         function renderPromos() {
             const grid = document.getElementById('promos-grid');
@@ -969,7 +1173,9 @@
                 img.src = promo.src;
                 img.alt = promo.alt || 'Promoción Ónílé';
                 img.loading = 'lazy';
+                img.decoding = 'async';
                 img.onerror = () => { card.style.display = 'none'; checkPromos(); };
+                img.addEventListener('click', () => openPromoModal(promo.src, promo.alt));
 
                 card.appendChild(img);
                 if (promo.caption) {
@@ -978,6 +1184,19 @@
                     caption.textContent = promo.caption;
                     card.appendChild(caption);
                 }
+
+                const actions = document.createElement('div');
+                actions.className = 'promo-card-actions';
+                const zoomBtn = document.createElement('button');
+                zoomBtn.className = 'promo-action-btn';
+                zoomBtn.textContent = '🔎 Ver';
+                zoomBtn.onclick = () => openPromoModal(promo.src, promo.alt);
+                const shareBtn = document.createElement('button');
+                shareBtn.className = 'promo-action-btn';
+                shareBtn.textContent = '↗ Compartir';
+                shareBtn.onclick = () => sharePromo(promo);
+                actions.append(zoomBtn, shareBtn);
+                card.appendChild(actions);
                 grid.appendChild(card);
             });
             checkPromos();
@@ -990,9 +1209,96 @@
             empty.style.display = visible ? 'none' : 'block';
         }
 
-        document.addEventListener('DOMContentLoaded', renderPromos);
+        function setupDrinkAccordions() {
+            document.querySelectorAll('#tab-bebidas .drink-card').forEach((card, idx) => {
+                const header = card.querySelector('.drink-card-header');
+                if (!header) return;
+                header.setAttribute('role','button');
+                header.setAttribute('tabindex','0');
+                // Mantener la primera sección abierta; el resto plegado para reducir scroll.
+                if (idx > 0) card.classList.add('collapsed');
+                const toggle = () => card.classList.toggle('collapsed');
+                header.addEventListener('click', toggle);
+                header.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }});
+            });
+        }
 
-        function switchTab(targetTabId) {
+        function applySmartTags() {
+            const rules = [
+                ['Tacos al Pastor','⭐ Recomendado','tag-gold'],
+                ['Costra de Camarón','⭐ Recomendado','tag-gold'],
+                ['Sushi Rolls','⭐ Recomendado','tag-gold'],
+                ['Filetes','Nuevo','tag-new'],
+                ['Aguachile','🌶 Picante','tag-hot'],
+                ['Camarones','🌶 Opc. picante','tag-hot'],
+                ['Mojarras','🌶 Opc. picante','tag-hot']
+            ];
+            document.querySelectorAll('.item-name').forEach(el => {
+                const text = el.textContent.trim();
+                const rule = rules.find(r => text === r[0]);
+                if (rule && !el.querySelector('.tag')) {
+                    const tag = document.createElement('span'); tag.className = `tag ${rule[2]}`; tag.textContent = rule[1]; el.appendChild(tag);
+                }
+            });
+        }
+
+        function setupSearch() {
+            const input = document.getElementById('menu-search');
+            const clear = document.getElementById('search-clear');
+            const status = document.getElementById('search-status');
+            const filter = () => {
+                const q = input.value.trim().toLowerCase();
+                clear.style.display = q ? 'block' : 'none';
+                const panel = document.querySelector('.tab-panel.active');
+                if (!panel) return;
+                const items = [...panel.querySelectorAll('.item')];
+                let visible = 0;
+                items.forEach(item => {
+                    const hit = !q || item.textContent.toLowerCase().includes(q);
+                    item.classList.toggle('hidden-by-search', !hit);
+                    if (hit) visible++;
+                });
+                // Mostrar/ocultar tarjetas o acordeones enteros si no tienen coincidencias.
+                panel.querySelectorAll('details.section-card, .drink-card').forEach(section => {
+                    const sectionItems = [...section.querySelectorAll('.item')];
+                    if (!sectionItems.length) return;
+                    const any = sectionItems.some(i => !i.classList.contains('hidden-by-search'));
+                    section.classList.toggle('hidden-by-search', !!q && !any);
+                    if (q && any && section.tagName === 'DETAILS') section.open = true;
+                    if (q && any && section.classList.contains('drink-card')) section.classList.remove('collapsed');
+                });
+                status.style.display = q ? 'block' : 'none';
+                status.textContent = q ? (visible ? `${visible} coincidencia${visible===1?'':'s'} en esta sección` : 'No encontramos coincidencias en esta sección.') : '';
+            };
+            input.addEventListener('input', filter);
+            clear.addEventListener('click', () => { input.value=''; filter(); input.focus(); });
+            window.filterCurrentTab = filter;
+        }
+
+        function setupFooterLinks() {
+            const ig = document.getElementById('instagram-link');
+            const tk = document.getElementById('tiktok-link');
+            if (SITE_CONFIG.instagram) ig.href = SITE_CONFIG.instagram; else ig.style.display='none';
+            if (SITE_CONFIG.tiktok) tk.href = SITE_CONFIG.tiktok; else tk.style.display='none';
+        }
+
+        function restoreLastTab() {
+            const saved = localStorage.getItem('onile-last-tab');
+            if (saved && document.getElementById(saved)) switchTab(saved, false);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPromos();
+            setupDrinkAccordions();
+            applySmartTags();
+            setupSearch();
+            setupFooterLinks();
+            restoreLastTab();
+            document.getElementById('promo-modal').addEventListener('click', e => { if (e.target.id === 'promo-modal') closePromoModal(); });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') closePromoModal(); });
+        });
+
+        function switchTab(targetTabId, remember = true) {
             const body = document.getElementById('main-body');
             const subtitle = document.getElementById('dynamic-subtitle');
 
@@ -1005,6 +1311,11 @@
             if (targetPanel) {
                 targetPanel.classList.add('active');
             }
+
+            document.querySelectorAll('.mobile-nav button').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === targetTabId));
+            if (remember) localStorage.setItem('onile-last-tab', targetTabId);
+            if (window.filterCurrentTab) window.filterCurrentTab();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
             // 3. Activar el botón correspondiente y gestionar el tema
             if (targetTabId === 'tab-comida') {
