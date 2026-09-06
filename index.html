@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Ónílé</title>
+    <title>Menú Ónílé | Buffet, Desayunos, Drinks y Promociones</title>
+    <meta name="description" content="Menú digital de Ónílé Buffet: 5 cocinas, desayunos, coctelería, botellas, cubetas y promociones especiales.">
+    <meta name="theme-color" content="#F7F3E9">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:title" content="Ónílé Buffet · Menú digital">
+    <meta property="og:description" content="5 cocinas · Buffet a la carta · Desayunos · Drinks · Promociones">
+    <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
@@ -585,20 +591,146 @@
         }
         @media(max-width:390px){ .welcome-title{font-size:1.35rem}.quick-actions{grid-template-columns:1fr 1fr}.quick-btn{font-size:.7rem} }
 
+
+
+        /* ===== ÓNÍLÉ 2.1: segunda pasada de UX, rendimiento y accesibilidad ===== */
+        :focus-visible { outline: 3px solid rgba(197,160,89,.45); outline-offset: 3px; }
+        button, a, summary { -webkit-tap-highlight-color: transparent; }
+        img { max-width: 100%; }
+        .container { width: min(100%, 680px); }
+
+        .tabs-nav {
+            position: sticky;
+            top: 8px;
+            z-index: 500;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .section-tools {
+            display:flex; gap:8px; flex-wrap:wrap; margin:0 0 14px;
+        }
+        .tool-btn, .category-chip {
+            border:1px solid var(--border-card); background:var(--bg-card); color:var(--primary-dark);
+            border-radius:999px; padding:8px 11px; font:700 .68rem var(--font-body); cursor:pointer;
+            transition:border-color .2s ease, transform .2s ease, background .2s ease;
+        }
+        .tool-btn:active, .category-chip:active { transform:scale(.97); }
+        .tool-btn:hover, .category-chip:hover { border-color:var(--accent-gold); }
+        .category-chips {
+            display:flex; gap:7px; overflow-x:auto; padding:1px 1px 9px; margin:0 0 10px;
+            scrollbar-width:none; scroll-snap-type:x proximity;
+        }
+        .category-chips::-webkit-scrollbar{display:none}
+        .category-chip { flex:0 0 auto; scroll-snap-align:start; white-space:nowrap; }
+
+        .search-wrap.sticky-search {
+            position:sticky; top:76px; z-index:480; padding-top:6px;
+            background:linear-gradient(var(--bg-main) 72%, transparent);
+        }
+
+        .search-status strong { color:var(--accent-gold); }
+        mark.menu-hit { background:rgba(197,160,89,.24); color:inherit; border-radius:3px; padding:0 1px; }
+
+        .promo-image-card { content-visibility:auto; contain-intrinsic-size: 500px 700px; }
+        details.section-card, .drink-card { content-visibility:auto; contain-intrinsic-size: 120px 320px; }
+        .promo-image-card img { aspect-ratio:auto; }
+        .promo-image-card.loading { min-height:220px; background:linear-gradient(90deg,var(--bg-card),rgba(197,160,89,.12),var(--bg-card)); background-size:220% 100%; animation:promoSkeleton 1.3s linear infinite; }
+        @keyframes promoSkeleton { to { background-position:-220% 0; } }
+
+        .back-to-top {
+            position:fixed; left:16px; bottom:88px; z-index:900; width:42px; height:42px; border-radius:50%;
+            border:1px solid var(--accent-gold); background:#111; color:#fff; display:grid; place-items:center;
+            box-shadow:0 8px 22px rgba(0,0,0,.28); cursor:pointer; opacity:0; pointer-events:none;
+            transform:translateY(8px); transition:.25s ease;
+        }
+        .back-to-top.show { opacity:1; pointer-events:auto; transform:none; }
+
+        .toast {
+            position:fixed; left:50%; bottom:104px; transform:translate(-50%,12px); z-index:10050;
+            background:#111; color:#fff; border:1px solid rgba(197,160,89,.65); border-radius:999px;
+            padding:10px 14px; font-size:.74rem; font-weight:700; opacity:0; pointer-events:none; transition:.24s ease;
+            max-width:calc(100vw - 32px); text-align:center;
+        }
+        .toast.show { opacity:1; transform:translate(-50%,0); }
+
+        .promo-count-badge {
+            display:inline-flex; min-width:20px; height:20px; padding:0 6px; align-items:center; justify-content:center;
+            border-radius:999px; background:var(--accent-gold); color:white; font-size:.62rem; margin-left:5px; vertical-align:middle;
+        }
+
+        .drink-card .drink-card-header[aria-expanded="false"] { margin-bottom:0; border-bottom-color:transparent; }
+
+        body.dark-theme .search-wrap.sticky-search { background:linear-gradient(var(--bg-main) 72%, transparent); }
+
+        @media(max-width:640px) {
+            body { padding-left:max(12px, env(safe-area-inset-left)); padding-right:max(12px, env(safe-area-inset-right)); padding-bottom:calc(98px + env(safe-area-inset-bottom)); }
+            .mobile-nav { bottom:max(10px, env(safe-area-inset-bottom)); }
+            .floating-promo, .back-to-top { bottom:calc(88px + env(safe-area-inset-bottom)); }
+            .search-wrap.sticky-search { top:0; padding:7px 0 9px; }
+            .welcome-hero { padding:21px 16px; }
+            .item-row { align-items:flex-start; }
+            .item-price { font-size:.9rem; }
+            .promo-action-btn, .quick-btn, .mobile-nav button { min-height:44px; }
+        }
+
+        @media(prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+        }
+
+
+        /* ===== ÓNÍLÉ 2.2: operación diaria desde menu-config.js ===== */
+        .service-now {
+            display:flex; align-items:center; justify-content:space-between; gap:12px;
+            border:1px solid var(--border-card); background:var(--bg-card); border-radius:14px;
+            padding:11px 13px; margin:-4px 0 16px; box-shadow:0 5px 16px rgba(0,0,0,.04);
+        }
+        .service-now-copy { min-width:0; }
+        .service-now-label { font-size:.62rem; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-muted); }
+        .service-now-title { font-weight:800; font-size:.83rem; margin-top:1px; }
+        .service-now-btn { border:0; background:var(--accent-gold); color:#fff; border-radius:999px; padding:8px 11px; font:800 .66rem var(--font-body); cursor:pointer; white-space:nowrap; }
+        .status-dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:#49a56c; margin-right:6px; box-shadow:0 0 0 3px rgba(73,165,108,.12); }
+        .status-dot.closed { background:#999; box-shadow:none; }
+
+        .item.sold-out { opacity:.58; }
+        .item.sold-out .item-name { text-decoration:none; }
+        .soldout-badge { display:inline-flex; margin-left:6px; padding:2px 7px; border-radius:999px; font-size:.58rem; font-weight:900; letter-spacing:.4px; color:#a54848; background:rgba(190,70,70,.11); vertical-align:middle; }
+        .config-hidden { display:none !important; }
+        .event-off-note { display:none; text-align:center; color:var(--text-muted); padding:18px; border:1px dashed var(--border-card); border-radius:14px; }
+
+        @media(max-width:420px){
+            .service-now { align-items:flex-start; }
+            .service-now-btn { padding:8px 10px; }
+        }
+
     </style>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"Restaurant",
+      "name":"Ónílé Buffet",
+      "servesCuisine":["Mexicana","Italiana","Argentina","Mariscos","Asiática"],
+      "priceRange":"$$",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"Periférico Emiliano Sánchez Piedras #152, Plaza Portales"
+      }
+    }
+    </script>
 </head>
 <body id="main-body">
 
     <div class="container">
         <header>
             <div class="logo-title">ÓNÍLÉ</div>
-            <div class="logo-subtitle" id="dynamic-subtitle">Bufet 5 cocinas</div>
+            <div class="logo-subtitle" id="dynamic-subtitle">Buffet 5 cocinas</div>
         </header>
 
         <section class="welcome-hero" aria-label="Bienvenida Ónílé">
             <div class="welcome-kicker">5 cocinas · una sola experiencia</div>
             <h1 class="welcome-title">Tú eliges. Nosotros cocinamos. Tú repites.</h1>
-            <p class="welcome-copy">Bufet de especialidades a la carta, desayunos, coctelería y promociones para cada ocasión.</p>
+            <p class="welcome-copy">Buffet de especialidades a la carta, desayunos, coctelería y promociones para cada ocasión.</p>
             <div class="quick-actions">
                 <button class="quick-btn" onclick="switchTab('tab-comida')">🍽️ Buffet</button>
                 <button class="quick-btn" onclick="switchTab('tab-desayunos')">☕ Desayunos</button>
@@ -614,14 +746,33 @@
         </div>
         <div id="search-status" class="search-status"></div>
 
+        <div id="service-now" class="service-now" aria-live="polite">
+            <div class="service-now-copy">
+                <div class="service-now-label">Disponible ahora</div>
+                <div id="service-now-title" class="service-now-title"><span class="status-dot"></span>Consultando horario…</div>
+            </div>
+            <button id="service-now-btn" class="service-now-btn" type="button">Ver carta</button>
+        </div>
+
         <div class="tabs-nav">
             <button id="btn-comida" class="tab-btn active" onclick="switchTab('tab-comida')">Buffet</button>
             <button id="btn-desayunos" class="tab-btn" onclick="switchTab('tab-desayunos')">Desayunos</button>
             <button id="btn-bebidas" class="tab-btn" onclick="switchTab('tab-bebidas')">Bebidas y coctelería</button>
-            <button id="btn-promos" class="tab-btn" onclick="switchTab('tab-promos')">Promociones</button>
+            <button id="btn-promos" class="tab-btn" onclick="switchTab('tab-promos')">Promociones <span id="promo-count-top" class="promo-count-badge">4</span></button>
         </div>
 
         <div id="tab-comida" class="tab-panel active">
+            <div class="section-tools" aria-label="Controles del buffet">
+                <button class="tool-btn" onclick="toggleDetailsInPanel('tab-comida', true)">Abrir cocinas</button>
+                <button class="tool-btn" onclick="toggleDetailsInPanel('tab-comida', false)">Cerrar cocinas</button>
+            </div>
+            <div class="category-chips" aria-label="Accesos a cocinas">
+                <button class="category-chip" onclick="jumpToHeading('Cocina Mexicana')">🇲🇽 Mexicana</button>
+                <button class="category-chip" onclick="jumpToHeading('Cocina Italiana')">🇮🇹 Italiana</button>
+                <button class="category-chip" onclick="jumpToHeading('Cocina Argentina')">🇦🇷 Argentina</button>
+                <button class="category-chip" onclick="jumpToHeading('Mariscos')">🦐 Mariscos</button>
+                <button class="category-chip" onclick="jumpToHeading('Cocina Asiática')">🥢 Asiática</button>
+            </div>
             <section aria-label="Cómo funciona el buffet">
                 <div class="info-strip">
                     <div class="info-step"><div class="info-step-num">1</div><b>Elige de la carta</b><span>Pide las especialidades que quieras probar.</span></div>
@@ -807,16 +958,20 @@
         </div>
 
         <div id="tab-desayunos" class="tab-panel">
+            <div class="section-tools" aria-label="Controles de desayunos">
+                <button class="tool-btn" onclick="toggleDetailsInPanel('tab-desayunos', true)">Abrir secciones</button>
+                <button class="tool-btn" onclick="toggleDetailsInPanel('tab-desayunos', false)">Cerrar secciones</button>
+            </div>
             <div class="pricing-container">
                 <div class="pricing-box">
                     <div class="pricing-days">Lun - Mié</div>
-                    <div class="pricing-time">9:00 - 11:00</div>
+                    <div class="pricing-time">8:00 - 12:00</div>
                     <div class="pricing-price">$138 <span>MXN</span></div>
                     <div class="pricing-desc">Buffet de desayunos</div>
                 </div>
                 <div class="pricing-box">
                     <div class="pricing-days">Jue - Dom</div>
-                    <div class="pricing-time">9:00 - 11:00</div>
+                    <div class="pricing-time">8:00 - 12:00</div>
                     <div class="pricing-price">$180 <span>MXN</span></div>
                     <div class="pricing-desc">Buffet de desayunos especial</div>
                 </div>
@@ -918,6 +1073,22 @@
         </div>
 
         <div id="tab-bebidas" class="tab-panel">
+            <div class="section-tools" aria-label="Controles de bebidas">
+                <button class="tool-btn" onclick="toggleDrinkCards(true)">Abrir bebidas</button>
+                <button class="tool-btn" onclick="toggleDrinkCards(false)">Cerrar bebidas</button>
+            </div>
+            <div class="category-chips" aria-label="Accesos a bebidas">
+                <button class="category-chip" onclick="jumpToDrink('Snacks')">🍗 Snacks</button>
+                <button class="category-chip" onclick="jumpToDrink('Ron')">🥃 Ron</button>
+                <button class="category-chip" onclick="jumpToDrink('Ginebra')">🍸 Ginebra</button>
+                <button class="category-chip" onclick="jumpToDrink('Vodka')">🍹 Vodka</button>
+                <button class="category-chip" onclick="jumpToDrink('Tequila')">🌵 Tequila</button>
+                <button class="category-chip" onclick="jumpToDrink('Whisky')">🥃 Whisky</button>
+                <button class="category-chip" onclick="jumpToDrink('Cervezas')">🍺 Cervezas</button>
+                <button class="category-chip" onclick="jumpToDrink('Preparados')">🍋 Preparados</button>
+                <button class="category-chip" onclick="jumpToDrink('Botellas para Evento')">🍾 Botellas</button>
+                <button class="category-chip" onclick="jumpToDrink('Cubetas')">🧊 Cubetas</button>
+            </div>
             <div class="promo-banner">
                 <div class="promo-title">✨ Noche de Drinks ✨</div>
                 <div class="promo-schedule">Jueves a Sábado • 20:00 a 24:00</div>
@@ -1089,6 +1260,7 @@
             </div>
             <div id="promos-grid" class="promos-grid"></div>
             <div id="promo-empty" class="promo-empty">Próximamente tendremos nuevas promociones. ✨</div>
+            <div id="event-off-note" class="event-off-note">No hay promociones de evento activas en este momento.</div>
         </div>
 
         <footer>
@@ -1109,14 +1281,18 @@
         <button data-tab="tab-comida" class="active" onclick="switchTab('tab-comida')"><span class="nav-icon">🍽️</span>Buffet</button>
         <button data-tab="tab-desayunos" onclick="switchTab('tab-desayunos')"><span class="nav-icon">☕</span>Desayunos</button>
         <button data-tab="tab-bebidas" onclick="switchTab('tab-bebidas')"><span class="nav-icon">🍸</span>Drinks</button>
-        <button data-tab="tab-promos" onclick="switchTab('tab-promos')"><span class="nav-icon">🔥</span>Promos</button>
+        <button data-tab="tab-promos" onclick="switchTab('tab-promos')"><span class="nav-icon">🔥</span>Promos <span id="promo-count-mobile" class="promo-count-badge">4</span></button>
     </nav>
+
+    <button id="back-to-top" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Volver arriba">↑</button>
+    <div id="app-toast" class="toast" role="status" aria-live="polite"></div>
 
     <div id="promo-modal" class="promo-modal" role="dialog" aria-modal="true" aria-label="Promoción ampliada">
         <button class="promo-modal-close" onclick="closePromoModal()">✕</button>
         <img id="promo-modal-img" src="" alt="Promoción ampliada">
     </div>
 
+    <script src="menu-config.js"></script>
     <script>
         /*
          * PROMOCIONES DEL EVENTO
@@ -1124,27 +1300,33 @@
          * Para añadir o quitar promociones, solo modifica este arreglo.
          * Ejemplo: { src: 'img/promociones/botellas-evento.png', alt: 'Promoción de botellas', caption: 'Promoción especial del evento' }
          */
-        const EVENT_PROMOS = [
-            { src: 'img/promociones/promo1.1.png', alt: 'Promoción 1.1 del evento Ónílé', caption: 'Bellako Deluxe' },
-            { src: 'img/promociones/promo2.1.png', alt: 'Promoción 2.1 del evento Ónílé', caption: 'Rip Perreo' }
-        ];
+        const CONFIG = window.ONILE_CONFIG || {};
+        const EVENT_PROMOS = (CONFIG.promos || [
+            { active: true, src: 'img/promociones/promo1.png', alt: 'Promoción 1 del evento Ónílé', caption: 'Promoción especial 1' },
+            { active: true, src: 'img/promociones/promo1.1.png', alt: 'Promoción 1.1 del evento Ónílé', caption: 'Bellako Deluxe' },
+            { active: true, src: 'img/promociones/promo2.png', alt: 'Promoción 2 del evento Ónílé', caption: 'Promoción especial 2' },
+            { active: true, src: 'img/promociones/promo2.1.png', alt: 'Promoción 2.1 del evento Ónílé', caption: 'Rip Perreo' }
+        ]).filter(p => p.active !== false);
 
         const SITE_CONFIG = {
-            instagram: '', // Ejemplo: 'https://instagram.com/tuusuario'
-            tiktok: ''     // Ejemplo: 'https://tiktok.com/@tuusuario'
+            instagram: CONFIG.business?.instagram || '',
+            tiktok: CONFIG.business?.tiktok || ''
         };
 
         function openPromoModal(src, alt) {
             const modal = document.getElementById('promo-modal');
             const modalImg = document.getElementById('promo-modal-img');
             modalImg.src = src; modalImg.alt = alt || 'Promoción Ónílé';
+            window.__onileLastFocus = document.activeElement;
             modal.classList.add('open');
             document.body.style.overflow = 'hidden';
+            modal.querySelector('.promo-modal-close')?.focus();
         }
 
         function closePromoModal() {
             document.getElementById('promo-modal').classList.remove('open');
             document.body.style.overflow = '';
+            window.__onileLastFocus?.focus?.();
         }
 
         async function sharePromo(promo) {
@@ -1152,7 +1334,7 @@
             if (navigator.share) {
                 try { await navigator.share(shareData); } catch(e) {}
             } else {
-                try { await navigator.clipboard.writeText(location.href); alert('Enlace copiado para compartir.'); }
+                try { await navigator.clipboard.writeText(location.href); showToast('Enlace copiado para compartir.'); }
                 catch(e) { prompt('Copia este enlace:', location.href); }
             }
         }
@@ -1165,14 +1347,15 @@
             grid.innerHTML = '';
             EVENT_PROMOS.forEach(promo => {
                 const card = document.createElement('article');
-                card.className = 'promo-image-card';
+                card.className = 'promo-image-card loading';
 
                 const img = document.createElement('img');
                 img.src = promo.src;
                 img.alt = promo.alt || 'Promoción Ónílé';
                 img.loading = 'lazy';
                 img.decoding = 'async';
-                img.onerror = () => { card.style.display = 'none'; checkPromos(); };
+                img.onload = () => card.classList.remove('loading');
+                img.onerror = () => { card.classList.remove('loading'); card.style.display = 'none'; checkPromos(); };
                 img.addEventListener('click', () => openPromoModal(promo.src, promo.alt));
 
                 card.appendChild(img);
@@ -1215,7 +1398,8 @@
                 header.setAttribute('tabindex','0');
                 // Mantener la primera sección abierta; el resto plegado para reducir scroll.
                 if (idx > 0) card.classList.add('collapsed');
-                const toggle = () => card.classList.toggle('collapsed');
+                header.setAttribute('aria-expanded', String(!card.classList.contains('collapsed')));
+                const toggle = () => { card.classList.toggle('collapsed'); header.setAttribute('aria-expanded', String(!card.classList.contains('collapsed'))); };
                 header.addEventListener('click', toggle);
                 header.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }});
             });
@@ -1285,18 +1469,175 @@
             if (saved && document.getElementById(saved)) switchTab(saved, false);
         }
 
+
+        function showToast(message) {
+            const toast = document.getElementById('app-toast');
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(window.__onileToastTimer);
+            window.__onileToastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+        }
+
+        function toggleDetailsInPanel(panelId, open) {
+            document.querySelectorAll(`#${panelId} details.section-card`).forEach(d => d.open = open);
+        }
+
+        function toggleDrinkCards(open) {
+            document.querySelectorAll('#tab-bebidas .drink-card').forEach(card => {
+                card.classList.toggle('collapsed', !open);
+                const header = card.querySelector('.drink-card-header');
+                if (header) header.setAttribute('aria-expanded', String(open));
+            });
+        }
+
+        function jumpToHeading(title) {
+            const heading = [...document.querySelectorAll('.tab-panel.active .section-title')].find(h => h.textContent.trim() === title);
+            if (!heading) return;
+            const details = heading.closest('details');
+            if (details) details.open = true;
+            heading.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+
+        function jumpToDrink(title) {
+            const heading = [...document.querySelectorAll('#tab-bebidas .drink-card-title')].find(h => h.textContent.trim() === title);
+            if (!heading) return;
+            const card = heading.closest('.drink-card');
+            card.classList.remove('collapsed');
+            const header = card.querySelector('.drink-card-header');
+            if (header) header.setAttribute('aria-expanded','true');
+            card.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+
+        function setupBackToTop() {
+            const btn = document.getElementById('back-to-top');
+            if (!btn) return;
+            const update = () => btn.classList.toggle('show', window.scrollY > 700);
+            window.addEventListener('scroll', update, {passive:true});
+            update();
+        }
+
+        function setupStickySearch() {
+            const wrap = document.querySelector('.search-wrap');
+            if (!wrap) return;
+            const update = () => wrap.classList.toggle('sticky-search', window.innerWidth <= 640 && window.scrollY > 300);
+            window.addEventListener('scroll', update, {passive:true});
+            window.addEventListener('resize', update, {passive:true});
+            update();
+        }
+
+        function updatePromoCounters() {
+            const count = CONFIG.event?.active === false ? 0 : EVENT_PROMOS.length;
+            ['promo-count-top','promo-count-mobile'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = count;
+            });
+        }
+
+        function updateThemeColor(isDark) {
+            const meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', isDark ? '#0D0D0D' : '#F7F3E9');
+        }
+
+        function setupScrollMemory() {
+            window.addEventListener('beforeunload', () => {
+                const active = document.querySelector('.tab-panel.active')?.id;
+                if (active) sessionStorage.setItem(`onile-scroll-${active}`, String(window.scrollY));
+            });
+        }
+
+        function applyOperationalConfig() {
+            const availability = CONFIG.availability || {};
+            document.querySelectorAll('.item-name').forEach(nameEl => {
+                const original = [...nameEl.childNodes].filter(n => n.nodeType === Node.TEXT_NODE).map(n => n.textContent).join('').trim();
+                const state = availability[original];
+                const item = nameEl.closest('.item');
+                if (!item || !state || state === 'available') return;
+                if (state === 'hidden') item.classList.add('config-hidden');
+                if (state === 'soldout') {
+                    item.classList.add('sold-out');
+                    if (!nameEl.querySelector('.soldout-badge')) {
+                        const badge = document.createElement('span');
+                        badge.className = 'soldout-badge';
+                        badge.textContent = 'AGOTADO';
+                        nameEl.appendChild(badge);
+                    }
+                }
+            });
+
+            const event = CONFIG.event || {};
+            const bottles = [...document.querySelectorAll('#tab-bebidas .drink-card')].find(c => c.querySelector('.drink-card-title')?.textContent.trim() === 'Botellas para Evento');
+            const buckets = [...document.querySelectorAll('#tab-bebidas .drink-card')].find(c => c.querySelector('.drink-card-title')?.textContent.trim() === 'Cubetas');
+            if (bottles && event.bottles === false) bottles.classList.add('config-hidden');
+            if (buckets && event.buckets === false) buckets.classList.add('config-hidden');
+
+            const floating = document.querySelector('.floating-promo');
+            if (floating && (event.active === false || event.floatingButton === false || EVENT_PROMOS.length === 0)) floating.classList.add('config-hidden');
+
+            const promoHeroTitle = document.querySelector('#tab-promos .event-hero-title');
+            const promoHeroCopy = document.querySelector('#tab-promos .event-hero-copy');
+            if (promoHeroTitle && event.title) promoHeroTitle.textContent = `✨ ${event.title} ✨`;
+            if (promoHeroCopy && event.message) promoHeroCopy.textContent = event.message;
+
+            if (event.active === false) {
+                document.getElementById('promos-grid')?.classList.add('config-hidden');
+                document.getElementById('promo-empty')?.classList.add('config-hidden');
+                const off = document.getElementById('event-off-note'); if (off) off.style.display='block';
+            }
+        }
+
+        function minutes(value) {
+            if (value === '24:00') return 1440;
+            const [h,m] = String(value || '00:00').split(':').map(Number);
+            return h*60 + m;
+        }
+
+        function updateServiceNow() {
+            const title = document.getElementById('service-now-title');
+            const btn = document.getElementById('service-now-btn');
+            if (!title || !btn) return;
+            const now = new Date();
+            const m = now.getHours()*60 + now.getMinutes();
+            const day = now.getDay();
+            const sch = CONFIG.schedule || {};
+            let label='Fuera de horario', tab='tab-comida', open=false;
+            if (sch.breakfast && m >= minutes(sch.breakfast.start) && m < minutes(sch.breakfast.end)) { label='Desayunos disponibles'; tab='tab-desayunos'; open=true; }
+            else if (sch.buffet && m >= minutes(sch.buffet.start) && m < minutes(sch.buffet.end)) { label='Buffet disponible'; tab='tab-comida'; open=true; }
+            else if (sch.drinks && (sch.drinks.days || []).includes(day) && m >= minutes(sch.drinks.start) && m < minutes(sch.drinks.end)) { label='Noche de Drinks'; tab='tab-bebidas'; open=true; }
+            else if (CONFIG.event?.active && EVENT_PROMOS.length) { label='Promociones del evento disponibles'; tab='tab-promos'; open=true; }
+            title.innerHTML = `<span class="status-dot ${open?'':'closed'}"></span>${label}`;
+            btn.textContent = open ? 'Ver carta' : 'Ver menú';
+            btn.onclick = () => switchTab(tab);
+        }
+
+        function pruneEmptySections() {
+            document.querySelectorAll('details.section-card, #tab-bebidas .drink-card').forEach(section => {
+                const items = [...section.querySelectorAll('.item')];
+                if (items.length && items.every(i => i.classList.contains('config-hidden'))) section.classList.add('config-hidden');
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             renderPromos();
             setupDrinkAccordions();
             applySmartTags();
             setupSearch();
             setupFooterLinks();
+            applyOperationalConfig();
+            pruneEmptySections();
+            updateServiceNow();
+            updatePromoCounters();
+            setupBackToTop();
+            setupStickySearch();
+            setupScrollMemory();
             restoreLastTab();
             document.getElementById('promo-modal').addEventListener('click', e => { if (e.target.id === 'promo-modal') closePromoModal(); });
             document.addEventListener('keydown', e => { if (e.key === 'Escape') closePromoModal(); });
         });
 
         function switchTab(targetTabId, remember = true) {
+            const current = document.querySelector('.tab-panel.active')?.id;
+            if (current) sessionStorage.setItem(`onile-scroll-${current}`, String(window.scrollY));
             const body = document.getElementById('main-body');
             const subtitle = document.getElementById('dynamic-subtitle');
 
@@ -1313,25 +1654,30 @@
             document.querySelectorAll('.mobile-nav button').forEach(btn => btn.classList.toggle('active', btn.dataset.tab === targetTabId));
             if (remember) localStorage.setItem('onile-last-tab', targetTabId);
             if (window.filterCurrentTab) window.filterCurrentTab();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const savedY = Number(sessionStorage.getItem(`onile-scroll-${targetTabId}`) || 0);
+            if (remember) window.scrollTo({ top: savedY, behavior: savedY ? 'auto' : 'smooth' });
 
             // 3. Activar el botón correspondiente y gestionar el tema
             if (targetTabId === 'tab-comida') {
                 document.getElementById('btn-comida').classList.add('active');
                 body.classList.remove('dark-theme');
                 subtitle.innerText = 'Buffet Experience';
+                updateThemeColor(false);
             } else if (targetTabId === 'tab-desayunos') {
                 document.getElementById('btn-desayunos').classList.add('active');
                 body.classList.remove('dark-theme');
                 subtitle.innerText = 'Buffet de Desayunos';
+                updateThemeColor(false);
             } else if (targetTabId === 'tab-bebidas') {
                 document.getElementById('btn-bebidas').classList.add('active');
                 body.classList.add('dark-theme');
                 subtitle.innerText = 'Noche de Coctelería';
+                updateThemeColor(true);
             } else if (targetTabId === 'tab-promos') {
                 document.getElementById('btn-promos').classList.add('active');
                 body.classList.add('dark-theme');
                 subtitle.innerText = 'Promociones & Eventos';
+                updateThemeColor(true);
             }
         }
     </script>
