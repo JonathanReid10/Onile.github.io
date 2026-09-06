@@ -1292,7 +1292,7 @@
         <img id="promo-modal-img" src="" alt="Promoción ampliada">
     </div>
 
-    <script src="menu-config.js"></script>
+    <script src="menu-config.js?v=2.2.1"></script>
     <script>
         /*
          * PROMOCIONES DEL EVENTO
@@ -1592,20 +1592,55 @@
             return h*60 + m;
         }
 
+        function getBusinessTime() {
+            const timeZone = CONFIG.business?.timeZone || 'America/Mexico_City';
+            try {
+                const parts = new Intl.DateTimeFormat('en-US', {
+                    timeZone,
+                    weekday: 'short',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                }).formatToParts(new Date());
+                const map = Object.fromEntries(parts.map(p => [p.type, p.value]));
+                const dayMap = { Sun:0, Mon:1, Tue:2, Wed:3, Thu:4, Fri:5, Sat:6 };
+                return {
+                    minutes: Number(map.hour) * 60 + Number(map.minute),
+                    day: dayMap[map.weekday],
+                    timeZone
+                };
+            } catch (e) {
+                const now = new Date();
+                return { minutes: now.getHours()*60 + now.getMinutes(), day: now.getDay(), timeZone: 'local' };
+            }
+        }
+
         function updateServiceNow() {
             const title = document.getElementById('service-now-title');
             const btn = document.getElementById('service-now-btn');
             if (!title || !btn) return;
-            const now = new Date();
-            const m = now.getHours()*60 + now.getMinutes();
-            const day = now.getDay();
+
+            const businessTime = getBusinessTime();
+            const m = businessTime.minutes;
+            const day = businessTime.day;
             const sch = CONFIG.schedule || {};
             let label='Fuera de horario', tab='tab-comida', open=false;
-            if (sch.breakfast && m >= minutes(sch.breakfast.start) && m < minutes(sch.breakfast.end)) { label='Desayunos disponibles'; tab='tab-desayunos'; open=true; }
-            else if (sch.buffet && m >= minutes(sch.buffet.start) && m < minutes(sch.buffet.end)) { label='Buffet disponible'; tab='tab-comida'; open=true; }
-            else if (sch.drinks && (sch.drinks.days || []).includes(day) && m >= minutes(sch.drinks.start) && m < minutes(sch.drinks.end)) { label='Noche de Drinks'; tab='tab-bebidas'; open=true; }
-            else if (CONFIG.event?.active && EVENT_PROMOS.length) { label='Promociones del evento disponibles'; tab='tab-promos'; open=true; }
+
+            const dayAllowed = service => !service?.days || service.days.length === 0 || service.days.includes(day);
+            const inRange = service => service && dayAllowed(service) && m >= minutes(service.start) && m < minutes(service.end);
+
+            if (inRange(sch.breakfast)) {
+                label='Desayunos disponibles'; tab='tab-desayunos'; open=true;
+            } else if (inRange(sch.buffet)) {
+                label='Buffet disponible'; tab='tab-comida'; open=true;
+            } else if (inRange(sch.drinks)) {
+                label='Noche de Drinks'; tab='tab-bebidas'; open=true;
+            } else if (CONFIG.event?.active && EVENT_PROMOS.length) {
+                label='Promociones del evento disponibles'; tab='tab-promos'; open=true;
+            }
+
             title.innerHTML = `<span class="status-dot ${open?'':'closed'}"></span>${label}`;
+            title.title = `Horario calculado con zona ${businessTime.timeZone}`;
             btn.textContent = open ? 'Ver carta' : 'Ver menú';
             btn.onclick = () => switchTab(tab);
         }
@@ -1626,6 +1661,7 @@
             applyOperationalConfig();
             pruneEmptySections();
             updateServiceNow();
+            setInterval(updateServiceNow, 60000);
             updatePromoCounters();
             setupBackToTop();
             setupStickySearch();
@@ -1679,6 +1715,10 @@
                 subtitle.innerText = 'Promociones & Eventos';
                 updateThemeColor(true);
             }
+        }
+    </script>
+</body>
+</html>
         }
     </script>
 </body>
