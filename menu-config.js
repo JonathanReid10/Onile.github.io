@@ -23,9 +23,7 @@ window.ONILE_CONFIG = {
 
   /* Promociones: activa o desactiva cada flyer sin borrar archivos. */
   promos: [
-    { : true, src: 'img/promociones/promo1.png',   alt: 'Promoción 1 del evento Ónílé',   caption: 'Promoción especial 1' },
     { active: true, src: 'img/promociones/promo1.1.png', alt: 'Promoción 1.1 del evento Ónílé', caption: 'Bellako Deluxe' },
-    { : true, src: 'img/promociones/promo2.png',   alt: 'Promoción 2 del evento Ónílé',   caption: 'Promoción especial 2' },
     { active: true, src: 'img/promociones/promo2.1.png', alt: 'Promoción 2.1 del evento Ónílé', caption: 'Rip Perreo' }
   ],
 
@@ -44,7 +42,7 @@ window.ONILE_CONFIG = {
 
   /* Horarios usados para mostrar “Qué está disponible ahora”. */
   schedule: {
-    breakfast: { start: '09:00', end: '12:00' },
+    breakfast: { start: '09:00', end: '11:00' },
     buffet:    { start: '12:00', end: '20:00' },
     drinks:    { days: [4,5,6], start: '20:00', end: '24:00' }
   }
