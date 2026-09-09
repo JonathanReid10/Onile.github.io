@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Ónílé | Buffet, Desayunos, Drinks y Promociones</title>
-    <meta name="description" content="Menú digital de Ónílé Buffet: 5 cocinas, desayunos, coctelería, botellas, cubetas y promociones especiales.">
+    <meta name="description" content="Menú digital de Ónílé Buffet: 4 cocinas, desayunos, coctelería, botellas, cubetas y promociones especiales.">
     <meta name="theme-color" content="#F7F3E9">
     <meta name="color-scheme" content="light dark">
     <meta property="og:title" content="Ónílé Buffet · Menú digital">
-    <meta property="og:description" content="5 cocinas · Buffet a la carta · Desayunos · Drinks · Promociones">
+    <meta property="og:description" content="4 cocinas · Buffet a la carta · Desayunos · Drinks · Promociones">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -710,7 +710,7 @@
       "@context":"https://schema.org",
       "@type":"Restaurant",
       "name":"Ónílé Buffet",
-      "servesCuisine":["Mexicana","Italiana","Argentina","Mariscos","Asiática"],
+      "servesCuisine":["Mexicana","Italiana","Mariscos","Asiática"],
       "priceRange":"$$",
       "address":{
         "@type":"PostalAddress",
@@ -724,11 +724,11 @@
     <div class="container">
         <header>
             <div class="logo-title">ÓNÍLÉ</div>
-            <div class="logo-subtitle" id="dynamic-subtitle">Bufet 5 cocinas</div>
+            <div class="logo-subtitle" id="dynamic-subtitle">Bufet 4 cocinas</div>
         </header>
 
         <section class="welcome-hero" aria-label="Bienvenida Ónílé">
-            <div class="welcome-kicker">5 cocinas · una sola experiencia</div>
+            <div class="welcome-kicker">4 cocinas · una sola experiencia</div>
             <h1 class="welcome-title">Tú eliges. Nosotros cocinamos. Tú repites.</h1>
             <p class="welcome-copy">Buffet de especialidades a la carta, desayunos, coctelería y promociones para cada ocasión.</p>
             <div class="quick-actions">
@@ -769,7 +769,6 @@
             <div class="category-chips" aria-label="Accesos a cocinas">
                 <button class="category-chip" onclick="jumpToHeading('Cocina Mexicana')">🇲🇽 Mexicana</button>
                 <button class="category-chip" onclick="jumpToHeading('Cocina Italiana')">🇮🇹 Italiana</button>
-                <button class="category-chip" onclick="jumpToHeading('Cocina Argentina')">🇦🇷 Argentina</button>
                 <button class="category-chip" onclick="jumpToHeading('Mariscos')">🦐 Mariscos</button>
                 <button class="category-chip" onclick="jumpToHeading('Cocina Asiática')">🥢 Asiática</button>
             </div>
@@ -835,6 +834,14 @@
                             <div class="item-name">Gringas</div>
                             <div class="item-desc">Carne marinada con queso fundido en tortilla de harina doradita.</div>
                         </li>
+                        <li class="item">
+                            <div class="item-name">Tacos de Chistorra</div>
+                            <div class="item-desc">Chistorra dorada al momento, servida en tortilla.</div>
+                        </li>
+                        <li class="item">
+                            <div class="item-name">Tacos de Picaña</div>
+                            <div class="item-desc">Picaña a la plancha, jugosa y servida en tortilla.</div>
+                        </li>
                     </ul>
                 </div>
             </details>
@@ -870,28 +877,7 @@
                 </div>
             </details>
 
-            <details class="section-card">
-                <summary class="section-header">
-                    <div class="header-content">
-                        <span class="section-icon">🇦🇷</span>
-                        <h2 class="section-title">Cocina Argentina</h2>
-                    </div>
-                    <span class="arrow-icon">▼</span>
-                </summary>
-                <div class="section-body">
-                    <div class="section-subtitle">Fuegos, cortes selectos y parrilla al carbón (no incluye tortillas)</div>
-                    <ul class="items-list">
-                        <li class="item">
-                            <div class="item-name">Carne a la Parrilla</div>
-                            <div class="item-desc">Cortes jugosos: Arrachera marinada, Picaña al carbón y Chistorra.</div>
-                        </li>
-                        <li class="item">
-                            <div class="item-name">Choripán Porteño</div>
-                            <div class="item-desc">Chorizo parrillero en pan crujiente con chimichurri tradicional.</div>
-                        </li>
-                    </ul>
-                </div>
-            </details>
+
 
             <details class="section-card">
                 <summary class="section-header">
@@ -954,6 +940,10 @@
                     </ul>
                 </div>
             </details>
+            <div class="benefits-card">
+                <div class="benefits-title">💧 Agua del día incluida</div>
+                <div class="benefit-row"><span>🥤</span><div><strong>Agua de frutas con refill sin costo</strong><small>Incluida durante tu buffet y puedes pedir refill las veces que quieras. No incluye coctelería ni otras bebidas de especialidad.</small></div></div>
+            </div>
             <p class="availability-note">* Algunos platillos e ingredientes pueden estar sujetos a disponibilidad.</p>
         </div>
 
@@ -1065,10 +1055,13 @@
                         <li class="item"><div class="item-row"><span class="item-name">Mocha</span><span class="item-price">$65</span></div></li>
                         <li class="item"><div class="item-row"><span class="item-name">Cappuccino</span><span class="item-price">$65</span></div></li>
                         <li class="item"><div class="item-row"><span class="item-name">Café Irlandés</span><span class="item-price">$70</span></div></li>
-                        <li class="item"><div class="item-row"><span class="item-name">Americano</span><span class="item-price">$60</span></div></li>
                     </ul>
                 </div>
             </details>
+            <div class="benefits-card">
+                <div class="benefits-title">☕ Café americano y tés incluidos</div>
+                <div class="benefit-row"><span>♨️</span><div><strong>Refill sin costo durante tu desayuno buffet</strong><small>Café americano y tés incluidos. Cafés de especialidad como Caramel Macchiato, Mocha, Cappuccino o Café Irlandés tienen costo adicional.</small></div></div>
+            </div>
             <p class="availability-note">* Algunos productos pueden estar sujetos a disponibilidad.</p>
         </div>
 
@@ -1202,7 +1195,7 @@
                         <li class="item"><div class="item-row"><span class="item-name">Jugo del Valle (Mango / Manzana / Durazno)</span><span class="item-price">$60</span></div></li>
                         <li class="item"><div class="item-row"><span class="item-name">Agua Mineral Peñafiel (600 ml)</span><span class="item-price">$60</span></div></li>
                         <li class="item"><div class="item-row"><span class="item-name">Agua Natural Bonafont (600 ml)</span><span class="item-price">$60</span></div></li>
-                        <li class="item"><div class="item-row"><span class="item-name">Agua del Día</span><span class="item-price">$70</span></div></li>
+                        <li class="item"><div class="item-row"><span class="item-name">Agua del Día</span><span class="item-price">Incluida en buffet</span></div><div class="item-desc">Agua de frutas con refill sin costo durante el buffet.</div></li>
                     </ul>
                 </div>
 
